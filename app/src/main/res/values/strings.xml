@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MathTinik</string>
+    <string name="math">Math</string>
+    <string name="tinik">Tinik</string>
+</resources>
