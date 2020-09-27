@@ -9,9 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".exitdialog"></activity>
+        <activity android:name=".level_choice"></activity>
+        <activity android:name=".levels" />
+        <activity android:name=".matching" />
+        <activity android:name=".divide_hard" />
+        <activity android:name=".divide_medium" />
+        <activity android:name=".divide_easy" />
+        <activity android:name=".multiply_hard" />
+        <activity android:name=".multiply_medium" />
+        <activity android:name=".multiply_easy" />
+        <activity android:name=".subtract_hard" />
+        <activity android:name=".subtract_medium" />
+        <activity android:name=".subtract_easy" />
+        <activity android:name=".addition_hard" />
+        <activity android:name=".addition_medium" />
+        <activity android:name=".addition_easy" />
+        <activity android:name=".exitdialog" />
         <activity android:name=".gamechoices" />
-        <activity android:name=".addition" />
         <activity android:name=".settings" />
         <activity android:name=".MainActivity">
             <intent-filter>

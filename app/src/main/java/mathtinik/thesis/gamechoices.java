@@ -1,6 +1,8 @@
 package mathtinik.thesis;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -14,8 +16,8 @@ import android.widget.TextView;
 
 public class gamechoices extends AppCompatActivity {
 
-    ImageView add, subtracts, multiply, divides;
-    TextView choicex;
+    ImageView add, subtracts, multiply, divides, backButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,15 @@ public class gamechoices extends AppCompatActivity {
         subtracts = findViewById(R.id.subtraction);
         multiply = findViewById(R.id.multiplication);
         divides = findViewById(R.id.division);
+        backButton = findViewById(R.id.backHome);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent h = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(h);
+            }
+        });
 
 
 

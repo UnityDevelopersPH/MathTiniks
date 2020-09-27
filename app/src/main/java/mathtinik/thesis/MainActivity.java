@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final AlertDialog cdialog = new AlertDialog.Builder(MainActivity.this).create();
                 LayoutInflater inflater = getLayoutInflater();
-
                 View cView = (View) inflater.inflate(R.layout.activity_exitdialog, null);
                 cdialog.setView(cView);
                 cdialog.show();
