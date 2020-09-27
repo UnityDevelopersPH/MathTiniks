@@ -2,22 +2,15 @@ package mathtinik.thesis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class gamechoices extends AppCompatActivity {
 
     ImageView add, subtracts, multiply, divides, backButton;
-
+    TextView choicex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +22,43 @@ public class gamechoices extends AppCompatActivity {
         multiply = findViewById(R.id.multiplication);
         divides = findViewById(R.id.division);
         backButton = findViewById(R.id.backHome);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent h = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(h);
-            }
-        });
-
-
+        choicex = findViewById(R.id.choicex);
+        mathematicsGroupBtn();
 
     }
+
+    public void mathematicsGroupBtn(){
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getchoiceX("Addition");
+            }
+        });
+        subtracts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getchoiceX("Subraction");
+            }
+        });
+        multiply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getchoiceX("Multiplication");
+            }
+        });
+        divides.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getchoiceX("Division");
+            }
+        });
+    }
+
+
+    public void getchoiceX(String mathematics){
+        choicex.setText("");
+        choicex.setText(mathematics);
+    }
+
 }
 
