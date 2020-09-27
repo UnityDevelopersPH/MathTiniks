@@ -1,9 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_main5"
+    android:orientation="vertical"
     tools:context=".level_choice">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:srcCompat="@drawable/back"
+        android:layout_margin="10dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_level"
+            android:textSize="50sp"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            />
+
+        <ImageView
+            android:id="@+id/level_one"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/level_one"
+            android:layout_margin="10dp"/>
+
+        <ImageView
+            android:id="@+id/level_2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/disabled_two"
+            android:layout_margin="10dp"/>
+
+        <ImageView
+            android:id="@+id/level_3"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/disabled_three"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
