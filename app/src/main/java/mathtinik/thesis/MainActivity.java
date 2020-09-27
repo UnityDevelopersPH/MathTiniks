@@ -23,11 +23,7 @@ public class MainActivity extends AppCompatActivity {
         imgplay = findViewById(R.id.playButton);
         exitapp = findViewById(R.id.exit);
 
-        final AlertDialog cdialog = new AlertDialog.Builder(MainActivity.this).create();
-        LayoutInflater inflater = getLayoutInflater();
 
-        View cView = (View) inflater.inflate(R.layout.activity_exitdialog, null);
-        cdialog.setView(cView);
 
 
         imgplay.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
         exitapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.exit(0);
+                final AlertDialog cdialog = new AlertDialog.Builder(MainActivity.this).create();
+                LayoutInflater inflater = getLayoutInflater();
+
+                View cView = (View) inflater.inflate(R.layout.activity_exitdialog, null);
+                cdialog.setView(cView);
                 cdialog.show();
             }
         });

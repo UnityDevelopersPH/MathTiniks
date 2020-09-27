@@ -2,23 +2,69 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="400dp"
-    android:background="@drawable/exitdialog"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingTop="30dp">
+        android:background="@color/colorPrimary"
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:textColor="#ffffff"
-            android:text="EXIT GAME"/>
+            android:text="@string/exit_app"/>
 
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:padding="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textColor="#ffffff"
+            android:text="@string/exit_app_sure_message"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryDark">
+
+        <Button
+            android:id="@+id/exit_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimarykDark2"
+            android:text="@string/yes"/>
+
+        <Button
+            android:id="@+id/exit_no"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimary"
+            android:text="@string/no"/>
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

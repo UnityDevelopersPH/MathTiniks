@@ -27,33 +27,7 @@ public class gamechoices extends AppCompatActivity {
         multiply = findViewById(R.id.multiplication);
         divides = findViewById(R.id.division);
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choicex.setText("Addition");
-            }
-        });
 
-        subtracts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choicex.setText("Subtraction");
-            }
-        });
-
-        multiply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choicex.setText("Multiplication");
-            }
-        });
-
-        divides.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choicex.setText("Division");
-            }
-        });
 
     }
 }
