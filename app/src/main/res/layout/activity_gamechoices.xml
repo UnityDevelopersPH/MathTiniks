@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:padding="10dp">
 
             <ImageView
@@ -43,19 +44,22 @@
             android:id="@+id/easys"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/easy"/>
+            android:background="@drawable/easy"
+            android:onClick="selection"/>
 
         <ImageView
             android:id="@+id/mediums"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/medium"/>
+            android:background="@drawable/medium"
+            android:onClick="selection"/>
 
         <ImageView
             android:id="@+id/hards"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/hard"/>
+            android:background="@drawable/hard"
+            android:onClick="selection"/>
 
     </LinearLayout>
 

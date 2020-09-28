@@ -2,15 +2,20 @@ package mathtinik.thesis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class gamechoices extends AppCompatActivity {
 
     ImageView add, subtracts, multiply, divides, backButton;
-    TextView choicex;
+    TextView choicex,coinCount;
+    StoringData storingData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,7 @@ public class gamechoices extends AppCompatActivity {
         divides = findViewById(R.id.division);
         backButton = findViewById(R.id.backHome);
         choicex = findViewById(R.id.choicex);
+
         mathematicsGroupBtn();
 
     }
@@ -54,10 +60,47 @@ public class gamechoices extends AppCompatActivity {
         });
     }
 
+    public void selection(View v){
+
+        String getMath = choicex.getText().toString();
+
+        switch (v.getId()){
+            case R.id.easys:
+                if (getMath.equals("Addition")){
+                    Log.d("result","Addition");
+                    ActivityCode(level_choice.class);
+
+                }else if(getMath.equals("Subraction")){
+                    Log.d("result","Subraction");
+                    ActivityCode(level_choice.class);
+                }else if(getMath.equals("Multiplication")){
+                    Log.d("result","Multiplication");
+                    ActivityCode(level_choice.class);
+                }else if(getMath.equals("Division")){
+
+                }
+
+                break;
+            case R.id.mediums:
+                Log.d("w","success mediums");
+                break;
+            case R.id.hards:
+                Log.d("ws","success hards");
+                break;
+            default:
+                break;
+        }
+    }
+
 
     public void getchoiceX(String mathematics){
         choicex.setText("");
         choicex.setText(mathematics);
+    }
+
+    public void ActivityCode(Class cls){
+        Intent intent = new Intent(getApplicationContext(),cls);
+        startActivity(intent);
     }
 
 }

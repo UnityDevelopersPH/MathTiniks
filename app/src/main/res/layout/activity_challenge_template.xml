@@ -131,6 +131,8 @@
         android:layout_margin="10dp"
         android:layout_weight="1">
 
+        <include layout="@layout/activity_question_template"/>
+
     </FrameLayout>
 
     <Button

@@ -28,27 +28,9 @@
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
                     android:layout_marginRight="10dp"
-                    android:text="50"/>
+                    android:text="0 + 0"/>
 
-                <TextView
-                    android:id="@+id/question_sign"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
-                    android:layout_marginRight="10dp"
-                    android:text="+"/>
 
-                <TextView
-                    android:id="@+id/question_two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
-                    android:layout_marginRight="10dp"
-                    android:text="50"/>
 
                 <TextView
                     android:layout_width="wrap_content"
