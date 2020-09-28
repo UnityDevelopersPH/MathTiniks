@@ -15,7 +15,6 @@
         app:srcCompat="@drawable/back"
         android:layout_margin="10dp"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

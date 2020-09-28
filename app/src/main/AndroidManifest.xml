@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".level_choice"></activity>
+        <activity android:name=".question_template"></activity>
+        <activity android:name=".challenge_template" />
+        <activity android:name=".level_choice" />
         <activity android:name=".levels" />
         <activity android:name=".matching" />
         <activity android:name=".divide_hard" />
