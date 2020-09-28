@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 public class levels extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     levelAdapter levelAdapter;
+    ImageView backtoChoose;
 
     String[] arr = {
             "1","2","3","4","5",
@@ -31,6 +35,17 @@ public class levels extends AppCompatActivity {
         levelAdapter=new levelAdapter(arr);
         recyclerView.setAdapter(levelAdapter);
         recyclerView.setHasFixedSize(true);
+
+        backtoChoose = findViewById(R.id.backtoChooseLevel);
+
+        backtoChoose.setOnClickListener(new View.OnClickListener(){
+            @Override
+                    public void onClick(View v){
+                Intent b = new Intent(getApplicationContext(), challenge_template.class);
+                startActivity(b);
+                finishActivity(1);
+            }
+        });
 
     }
 

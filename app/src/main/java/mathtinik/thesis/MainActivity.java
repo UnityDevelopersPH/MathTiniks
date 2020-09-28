@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         imgplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent choice = new Intent(getApplicationContext(), gamechoices.class);
-                startActivity(choice);
+               Intent choice = new Intent(getApplicationContext(), gamechoices.class);
+               startActivity(choice);
             }
         });
 

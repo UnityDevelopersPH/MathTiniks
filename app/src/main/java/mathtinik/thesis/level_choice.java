@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 public class level_choice extends AppCompatActivity {
 
-    ImageView level1,level2,level3;
+    ImageView level1,level2,level3,btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,23 @@ public class level_choice extends AppCompatActivity {
 
             }
         });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent b = new Intent(getApplicationContext(), gamechoices.class);
+                startActivity(b);
+                finishActivity(1);
+            }
+        });
+
+
     }
 
     public void UI(){
         level1 = findViewById(R.id.level_one);
         level2 = findViewById(R.id.level_2);
         level3 = findViewById(R.id.level_3);
+        btnBack = findViewById(R.id.back);
     }
 }
