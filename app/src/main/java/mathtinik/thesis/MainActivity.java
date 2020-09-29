@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         editor = getSharedPreferences("StoringData", MODE_PRIVATE).edit();
         prefs = getSharedPreferences("StoringData", MODE_PRIVATE);
 
+        editor.remove("operation");
+        editor.commit();
+
 
 
 

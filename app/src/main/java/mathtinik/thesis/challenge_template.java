@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.content.SharedPreferences;
+import android.icu.util.LocaleData;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class challenge_template extends AppCompatActivity {
     StoringData storingData;
     int coinCounts;
     TextView checkCount,wrongCount,coinCount;
+    ImageView life_one,life_two,life_three;
 
 
     @Override
@@ -45,6 +48,9 @@ public class challenge_template extends AppCompatActivity {
         wrongCount = findViewById(R.id.countWrong);
         coinCount = findViewById(R.id.coinCount);
         operation = findViewById(R.id.operation);
+        life_one = findViewById(R.id.life_one);
+        life_two = findViewById(R.id.life_two);
+        life_three = findViewById(R.id.life_three);
 
         question_Two = findViewById(R.id.question_Two);
 
@@ -55,7 +61,6 @@ public class challenge_template extends AppCompatActivity {
         ans2.setOnLongClickListener(longClickListener);
         ans3.setOnLongClickListener(longClickListener);
         ans4.setOnLongClickListener(longClickListener);
-
 
         targetAns.setOnDragListener(dragListener);
 
@@ -170,7 +175,6 @@ public class challenge_template extends AppCompatActivity {
         answers.add(Math.abs(answer+2));
         answers.add(Math.abs(answer-1));
         Collections.shuffle(answers);
-        Log.i("MyActivity","New question");
 
         for(int x = 0;x<answers.size();x++){
             if (answer == answers.get(x)){
@@ -183,7 +187,10 @@ public class challenge_template extends AppCompatActivity {
         ans3.setText(Integer.toString(answers.get(2)));
         ans4.setText(Integer.toString(answers.get(3)));
 
+        Log.d("showError",Integer.toString(answers.get(0))+Integer.toString(answers.get(1)));
+
         answers.clear();
+
 
     }
 
@@ -221,6 +228,13 @@ public class challenge_template extends AppCompatActivity {
                    wrongCount.setText(String.valueOf(wrongCounts));
                    targetAns.setText("");
                    generateQuestion();
+
+                       if(Integer.parseInt(wrongCount.getText().toString()) % 3 == 0){
+                           Log.d("pasayawin","lumabas");
+                       }else{
+                           Log.d("pasayawin","ayokonglumabas");
+                       }
+
                }
            }
        });
