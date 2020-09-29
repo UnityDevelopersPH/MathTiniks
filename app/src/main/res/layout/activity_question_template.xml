@@ -69,6 +69,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/colorWhite"
                     android:layout_gravity="center"
+                    android:editable="false"
                     android:paddingLeft="15dp"
                     android:background="@color/colorPrimarykDark2"/>
 

@@ -1,18 +1,30 @@
 package mathtinik.thesis;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.content.ClipData;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.icu.util.LocaleData;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +33,7 @@ import java.util.Random;
 public class challenge_template extends AppCompatActivity {
 
     ArrayList<Integer> answers = new ArrayList<>();
+    ObjectAnimator anim;
     int locatiionOfCorrectAnswer;
     int num1;
     int num2;
@@ -195,9 +208,11 @@ public class challenge_template extends AppCompatActivity {
     }
 
     public void submitBtn(){
+
        submitBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+
                int Fnum1 = Integer.parseInt(question_One.getText().toString());
                int Fnum2 = Integer.parseInt(question_Two.getText().toString());
                int checkAns = 0;
@@ -213,32 +228,112 @@ public class challenge_template extends AppCompatActivity {
 
                Log.d("s",String.valueOf(checkAns));
 
-               if (targetAns.getText().toString().equals(String.valueOf(checkAns))){
-                   checkCounts++;
-                   checkCount.setText(String.valueOf(checkCounts));
-                   int getCoins = Integer.parseInt(coinCount.getText().toString());
-                   getCoins++;
-                   MainActivity.editor.putInt("Coins", getCoins);
-                   MainActivity.editor.apply();
-                   coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
-                   targetAns.setText("");
-                   generateQuestion();
-               }else{
-                   wrongCounts++;
-                   wrongCount.setText(String.valueOf(wrongCounts));
-                   targetAns.setText("");
-                   generateQuestion();
+               if (targetAns.getText().toString().equals("")) {
 
-                       if(Integer.parseInt(wrongCount.getText().toString()) % 3 == 0){
-                           Log.d("pasayawin","lumabas");
-                       }else{
-                           Log.d("pasayawin","ayokonglumabas");
+                   Toast.makeText(challenge_template.this, "Please Drag and Drop your Answer", Toast.LENGTH_SHORT).show();
+
+               }else if (targetAns.getText().toString().equals(String.valueOf(checkAns))){
+
+                           checkCounts++;
+                           checkCount.setText(String.valueOf(checkCounts));
+                           int getCoins = Integer.parseInt(coinCount.getText().toString());
+                           getCoins++;
+                           int getLevelUnlock = MainActivity.prefs.getInt("UnlockLevel",1);
+                           getLevelUnlock++;
+
+                           MainActivity.editor.putInt("UnlockLevel", getLevelUnlock);
+                           MainActivity.editor.putInt("Coins", getCoins);
+                           MainActivity.editor.apply();
+                   final AlertDialog cdialog = new AlertDialog.Builder(challenge_template.this).create();
+                   LayoutInflater inflater = getLayoutInflater();
+                   View cView = (View) inflater.inflate(R.layout.correct, null);
+                   cdialog.setView(cView);
+                   cdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
+                   cdialog.setCanceledOnTouchOutside(true);
+                   cdialog.setCancelable(false);
+                   cdialog.show();
+                   final Handler handler = new Handler();
+                   final Runnable r = new Runnable()
+                   {
+                       public void run()
+                       {
+                           generateQuestion();
+                           cdialog.dismiss();
                        }
+                   };
+                   handler.postDelayed(r, 1000);
+                           coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
+                           targetAns.setText("");
+                           generateQuestion();
 
-               }
-           }
+                       }else{
+                           wrongCounts++;
+                           wrongCount.setText(String.valueOf(wrongCounts));
+                           targetAns.setText("");
+
+                           final AlertDialog wdialog = new AlertDialog.Builder(challenge_template.this).create();
+                           LayoutInflater inflater = getLayoutInflater();
+                           View wView = (View) inflater.inflate(R.layout.wrong, null);
+                           wdialog.setView(wView);
+                           wdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
+                           wdialog.setCanceledOnTouchOutside(true);
+                           wdialog.setCancelable(false);
+                           wdialog.show();
+                           final Handler handler = new Handler();
+                           final Runnable r = new Runnable()
+                           {
+                               public void run()
+                               {
+                                   generateQuestion();
+                                   wdialog.dismiss();
+                               }
+                           };
+                           handler.postDelayed(r, 1000);
+
+                           if (wrongCount.getText().toString().equals("1")){
+                               life_one.setVisibility(View.GONE);
+                           }
+                           if (wrongCount.getText().toString().equals("2")){
+                               life_two.setVisibility(View.GONE);
+                           }
+                           if (wrongCount.getText().toString().equals("3")){
+                               life_two.setVisibility(View.GONE);
+                               final AlertDialog gdialog = new AlertDialog.Builder(challenge_template.this).create();
+                               LayoutInflater ginflater = getLayoutInflater();
+                               View gView = (View) inflater.inflate(R.layout.gameover, null);
+                               TextView getCoins = gView.findViewById(R.id.getCoins);
+                               Button close_gameover = gView.findViewById(R.id.close_gameover);
+                               getCoins.setText(checkCount.getText().toString());
+                               gdialog.setView(gView);
+
+                               close_gameover.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View v) {
+                                       Intent backToHome = new Intent(challenge_template.this,gamechoices.class);
+                                       startActivity(backToHome);
+                                   }
+                               });
+                               gdialog.setCanceledOnTouchOutside(true);
+                               gdialog.setCancelable(false);
+
+                               gdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
+
+                               gdialog.show();
+                           }
+
+                       }
+                   }
+
        });
 
+    }
+
+
+    private void restoreUI(){
+        ans1.setBackgroundColor(ContextCompat.getColor(challenge_template.this,R.color.colorPrimary));
+        ans2.setBackgroundColor(ContextCompat.getColor(challenge_template.this,R.color.colorPrimary));
+        ans3.setBackgroundColor(ContextCompat.getColor(challenge_template.this,R.color.colorPrimary));
+        ans4.setBackgroundColor(ContextCompat.getColor(challenge_template.this,R.color.colorPrimary));
     }
 
 

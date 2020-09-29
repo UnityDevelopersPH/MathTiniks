@@ -2,6 +2,7 @@ package mathtinik.thesis;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class level_choice extends AppCompatActivity {
 
@@ -22,6 +24,15 @@ public class level_choice extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_choice);
         UI();
+
+
+        if(MainActivity.prefs.getInt("level2unlock",0) == 2){
+            level2.setImageResource(R.drawable.level_two);
+        }
+        if(MainActivity.prefs.getInt("level3unlock",0) == 3){
+            level3.setImageResource(R.drawable.level_three);
+        }
+
 
         level1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,11 +56,18 @@ public class level_choice extends AppCompatActivity {
                     unlockBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("s","unlcik");
+                           if (MainActivity.prefs.getInt("Coins",0) >= 2){
+                               MainActivity.editor.putInt("level2unlock",2);
+                               MainActivity.editor.apply();
+                           }else{
+                               Toast.makeText(level_choice.this, "mababa pa ang pera mo", Toast.LENGTH_SHORT).show();
+                           }
                         }
                     });
 
                 }else{
+
+                    Toast.makeText(level_choice.this, "Pumunta sa ibang syudad", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -60,6 +78,32 @@ public class level_choice extends AppCompatActivity {
         level3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(level3.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.disabled_three).getConstantState()){
+                    final AlertDialog cdialog = new AlertDialog.Builder(level_choice.this).create();
+                    LayoutInflater inflater = getLayoutInflater();
+                    View cView = (View) inflater.inflate(R.layout.activity_unlock, null);
+                    Button unlockBtn = cView.findViewById(R.id.unclock);
+                    cdialog.setView(cView);
+                    cdialog.show();
+                    unlockBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (MainActivity.prefs.getInt("Coins",0) >= 2){
+                                MainActivity.editor.putInt("level3unlock",3);
+                                MainActivity.editor.apply();
+                                cdialog.dismiss();
+                            }else{
+                                Toast.makeText(level_choice.this, "mababa pa ang pera mo", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                }else{
+
+                    Toast.makeText(level_choice.this, "Pumunta sa ibang syudad", Toast.LENGTH_SHORT).show();
+
+                }
 
             }
         });

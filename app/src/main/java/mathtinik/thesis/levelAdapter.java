@@ -2,6 +2,7 @@ package mathtinik.thesis;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,12 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
     public void onBindViewHolder(@NonNull LevelHolder holder, int position) {
 
         holder.num_level.setText(arr[position]);
+        String getNumLevel = holder.num_level.getText().toString();
+        for (int i = 0; i<Integer.parseInt(getNumLevel);i++){
+            if (i == MainActivity.prefs.getInt("UnlockLevel",1)){
+                holder.num_level.setText("");
+            }
+        }
 
     }
 
@@ -60,8 +67,12 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
         @Override
         public void onClick(View v) {
 
-            Intent intent = new Intent(context,challenge_template.class);
-            context.startActivity(intent);
+            if (!num_level.getText().toString().equals("")){
+                Intent intent = new Intent(context,challenge_template.class);
+                context.startActivity(intent);
+            }else{
+                Log.d("results","Please Unlock");
+            }
 
         }
     }
