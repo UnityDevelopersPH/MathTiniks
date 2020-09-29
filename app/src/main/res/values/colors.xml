@@ -5,4 +5,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed">#c0392b</color>
+    <color name="colorLightRed">#e74c3c</color>
+    <color name="colorDarkRed">#d63031</color>
 </resources>
