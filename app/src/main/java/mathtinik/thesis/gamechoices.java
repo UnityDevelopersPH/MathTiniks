@@ -67,17 +67,25 @@ public class gamechoices extends AppCompatActivity {
         switch (v.getId()){
             case R.id.easys:
                 if (getMath.equals("Addition")){
-                    Log.d("result","Addition");
+                    MainActivity.editor.putString("operation","Addition");
+                    MainActivity.editor.apply();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
                     ActivityCode(level_choice.class);
-
                 }else if(getMath.equals("Subraction")){
-                    Log.d("result","Subraction");
+                    MainActivity.editor.putString("operation","Subraction");
+                    MainActivity.editor.apply();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
                     ActivityCode(level_choice.class);
                 }else if(getMath.equals("Multiplication")){
-                    Log.d("result","Multiplication");
+                    MainActivity.editor.putString("operation","Multiplication");
+                    MainActivity.editor.apply();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
                     ActivityCode(level_choice.class);
                 }else if(getMath.equals("Division")){
-
+                    MainActivity.editor.putString("operation","Division");
+                    MainActivity.editor.apply();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
+                    ActivityCode(level_choice.class);
                 }
 
                 break;

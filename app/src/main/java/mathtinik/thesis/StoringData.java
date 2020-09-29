@@ -1,10 +1,10 @@
 package mathtinik.thesis;
 
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class StoringData {
-
-    List<String> list = new ArrayList<String>();
-
+    SharedPreferences.Editor editor;
 }

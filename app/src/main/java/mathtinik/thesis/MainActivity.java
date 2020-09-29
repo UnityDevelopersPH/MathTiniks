@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     ImageButton imgplay, exitapp;
+    public static SharedPreferences.Editor editor;
+    public static SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         imgplay = findViewById(R.id.playButton);
         exitapp = findViewById(R.id.exit);
+        editor = getSharedPreferences("StoringData", MODE_PRIVATE).edit();
+        prefs = getSharedPreferences("StoringData", MODE_PRIVATE);
 
 
 

@@ -59,10 +59,23 @@
                 <LinearLayout
                     android:padding="5dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/player_life"
+                        android:id="@+id/life_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/life"
+                        />
+                    <ImageView
+                        android:id="@+id/life_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/life"
+                        />
+                    <ImageView
+                        android:id="@+id/life_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/life"
@@ -85,6 +98,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/countCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -110,6 +124,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/countWrong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"

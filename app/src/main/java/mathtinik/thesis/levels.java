@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class levels extends AppCompatActivity {
 
@@ -15,6 +16,7 @@ public class levels extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     levelAdapter levelAdapter;
     ImageView backtoChoose;
+    TextView coinCount,selectOperation;
 
     String[] arr = {
             "1","2","3","4","5",
@@ -30,20 +32,24 @@ public class levels extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
         recyclerView = findViewById(R.id.recyclerView);
+        coinCount = findViewById(R.id.coinCount);
+        selectOperation = findViewById(R.id.selectOperation);
         layoutManager=new GridLayoutManager(this,5);
         recyclerView.setLayoutManager(layoutManager);
-        levelAdapter=new levelAdapter(arr);
+        levelAdapter=new levelAdapter(arr, levels.this);
         recyclerView.setAdapter(levelAdapter);
         recyclerView.setHasFixedSize(true);
+
+        selectOperation.setText(MainActivity.prefs.getString("operation",null));
+
+        coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
 
         backtoChoose = findViewById(R.id.backtoChooseLevel);
 
         backtoChoose.setOnClickListener(new View.OnClickListener(){
             @Override
                     public void onClick(View v){
-                Intent b = new Intent(getApplicationContext(), challenge_template.class);
-                startActivity(b);
-                finishActivity(1);
+
             }
         });
 
