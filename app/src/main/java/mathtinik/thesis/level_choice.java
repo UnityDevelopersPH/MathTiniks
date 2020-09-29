@@ -37,6 +37,8 @@ public class level_choice extends AppCompatActivity {
         level1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.editor.putString("SelectedLevel","Level1");
+                MainActivity.editor.apply();
                 Intent intent = new Intent(getApplicationContext(),levels.class);
                 startActivity(intent);
 
@@ -57,6 +59,8 @@ public class level_choice extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                            if (MainActivity.prefs.getInt("Coins",0) >= 2){
+                               int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 2;
+                               MainActivity.editor.putInt("Coins",getCurrentCoins);
                                MainActivity.editor.putInt("level2unlock",2);
                                MainActivity.editor.apply();
                            }else{
@@ -66,9 +70,10 @@ public class level_choice extends AppCompatActivity {
                     });
 
                 }else{
-
-                    Toast.makeText(level_choice.this, "Pumunta sa ibang syudad", Toast.LENGTH_SHORT).show();
-
+                    MainActivity.editor.putString("SelectedLevel","Level2");
+                    MainActivity.editor.apply();
+                    Intent intent = new Intent(getApplicationContext(),levels.class);
+                    startActivity(intent);
                 }
 
 
@@ -90,6 +95,8 @@ public class level_choice extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             if (MainActivity.prefs.getInt("Coins",0) >= 2){
+                                int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 2;
+                                MainActivity.editor.putInt("Coins",getCurrentCoins);
                                 MainActivity.editor.putInt("level3unlock",3);
                                 MainActivity.editor.apply();
                                 cdialog.dismiss();
@@ -100,9 +107,10 @@ public class level_choice extends AppCompatActivity {
                     });
 
                 }else{
-
-                    Toast.makeText(level_choice.this, "Pumunta sa ibang syudad", Toast.LENGTH_SHORT).show();
-
+                    MainActivity.editor.putString("SelectedLevel","Level3");
+                    MainActivity.editor.apply();
+                    Intent intent = new Intent(getApplicationContext(),levels.class);
+                    startActivity(intent);
                 }
 
             }

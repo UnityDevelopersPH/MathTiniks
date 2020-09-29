@@ -238,10 +238,9 @@ public class challenge_template extends AppCompatActivity {
                            checkCount.setText(String.valueOf(checkCounts));
                            int getCoins = Integer.parseInt(coinCount.getText().toString());
                            getCoins++;
-                           int getLevelUnlock = MainActivity.prefs.getInt("UnlockLevel",1);
-                           getLevelUnlock++;
-
-                           MainActivity.editor.putInt("UnlockLevel", getLevelUnlock);
+                               int getLevelUnlock = MainActivity.prefs.getInt("UnlockLevel1-30",1);
+                               getLevelUnlock++;
+                               MainActivity.editor.putInt("UnlockLevel1-30", getLevelUnlock);
                            MainActivity.editor.putInt("Coins", getCoins);
                            MainActivity.editor.apply();
                    final AlertDialog cdialog = new AlertDialog.Builder(challenge_template.this).create();
