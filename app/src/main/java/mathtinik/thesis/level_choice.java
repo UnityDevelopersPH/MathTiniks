@@ -70,7 +70,8 @@ public class level_choice extends AppCompatActivity {
                     });
 
                 }else{
-                    MainActivity.editor.putString("SelectedLevel","Level2");
+
+                    MainActivity.editor.putString("SelectedLevel","Level31");
                     MainActivity.editor.apply();
                     Intent intent = new Intent(getApplicationContext(),levels.class);
                     startActivity(intent);
@@ -107,7 +108,8 @@ public class level_choice extends AppCompatActivity {
                     });
 
                 }else{
-                    MainActivity.editor.putString("SelectedLevel","Level3");
+
+                    MainActivity.editor.putString("SelectedLevel","Level61");
                     MainActivity.editor.apply();
                     Intent intent = new Intent(getApplicationContext(),levels.class);
                     startActivity(intent);

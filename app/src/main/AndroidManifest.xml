@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".unlock"></activity>
+        <activity android:name=".unlock" />
         <activity android:name=".question_template" />
         <activity android:name=".challenge_template" />
         <activity android:name=".level_choice" />

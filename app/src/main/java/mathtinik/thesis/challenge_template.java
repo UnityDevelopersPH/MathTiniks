@@ -150,16 +150,33 @@ public class challenge_template extends AppCompatActivity {
                     if (view.getId() == R.id.ans1){
                         String getAns1= ans1.getText().toString();
                         targetAns.setText(getAns1);
+                        ans1.setVisibility(View.GONE);
+                        ans2.setVisibility(View.VISIBLE);
+                        ans3.setVisibility(View.VISIBLE);
+                        ans4.setVisibility(View.VISIBLE);
                     }else  if (view.getId() == R.id.ans2){
                         String getAns2= ans2.getText().toString();
                         targetAns.setText(getAns2);
+                        ans1.setVisibility(View.VISIBLE);
+                        ans2.setVisibility(View.GONE);
+                        ans3.setVisibility(View.VISIBLE);
+                        ans4.setVisibility(View.VISIBLE);
                     }else  if (view.getId() == R.id.ans3){
                         String getAns3= ans3.getText().toString();
                         targetAns.setText(getAns3);
+                        ans1.setVisibility(View.VISIBLE);
+                        ans2.setVisibility(View.VISIBLE);
+                        ans3.setVisibility(View.GONE);
+                        ans4.setVisibility(View.VISIBLE);
                     }else  if (view.getId() == R.id.ans4){
                         String getAns4= ans4.getText().toString();
                         targetAns.setText(getAns4);
+                        ans1.setVisibility(View.VISIBLE);
+                        ans2.setVisibility(View.VISIBLE);
+                        ans3.setVisibility(View.VISIBLE);
+                        ans4.setVisibility(View.GONE);
                     }
+                    break;
             }
             return true;
         }
@@ -238,9 +255,26 @@ public class challenge_template extends AppCompatActivity {
                            checkCount.setText(String.valueOf(checkCounts));
                            int getCoins = Integer.parseInt(coinCount.getText().toString());
                            getCoins++;
-                               int getLevelUnlock = MainActivity.prefs.getInt("UnlockLevel1-30",1);
-                               getLevelUnlock++;
-                               MainActivity.editor.putInt("UnlockLevel1-30", getLevelUnlock);
+                               if (MainActivity.prefs.getString("operation",null) == "Addition"){
+                                   int getLevelUnlock = MainActivity.prefs.getInt("addLevel",1);
+                                   getLevelUnlock++;
+                                   MainActivity.editor.putInt("addLevel", getLevelUnlock);
+                               }else
+                               if (MainActivity.prefs.getString("operation",null) == "Subraction"){
+                                   int getLevelUnlock = MainActivity.prefs.getInt("subLevel",1);
+                                   getLevelUnlock++;
+                                   MainActivity.editor.putInt("subLevel", getLevelUnlock);
+                               }else
+                               if (MainActivity.prefs.getString("operation",null) == "Multiplication"){
+                                   int getLevelUnlock = MainActivity.prefs.getInt("mulLevel",1);
+                                   getLevelUnlock++;
+                                   MainActivity.editor.putInt("mulLevel", getLevelUnlock);
+                               }else
+                               if (MainActivity.prefs.getString("operation",null) == "Division"){
+                                   int getLevelUnlock = MainActivity.prefs.getInt("diviLevel",1);
+                                   getLevelUnlock++;
+                                   MainActivity.editor.putInt("diviLevel", getLevelUnlock);
+                               }
                            MainActivity.editor.putInt("Coins", getCoins);
                            MainActivity.editor.apply();
                    final AlertDialog cdialog = new AlertDialog.Builder(challenge_template.this).create();

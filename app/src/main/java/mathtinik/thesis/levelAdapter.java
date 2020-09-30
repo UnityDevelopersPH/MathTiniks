@@ -37,8 +37,25 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
         holder.num_level.setText(arr[position]);
         String getNumLevel = holder.num_level.getText().toString();
         for (int i = 0; i<Integer.parseInt(getNumLevel);i++){
-            if (i == MainActivity.prefs.getInt("UnlockLevel1-30",1)){
-                holder.num_level.setText("");
+            if (MainActivity.prefs.getString("operation",null) == "Addition"){
+                if (i == MainActivity.prefs.getInt("addLevel",1)){
+                    holder.num_level.setText("");
+                }
+            }else
+            if (MainActivity.prefs.getString("operation",null) == "Subraction"){
+                if (i == MainActivity.prefs.getInt("subLevel",1)){
+                    holder.num_level.setText("");
+                }
+            }else
+            if (MainActivity.prefs.getString("operation",null) == "Multiplication"){
+                if (i == MainActivity.prefs.getInt("mulLevel",1)){
+                    holder.num_level.setText("");
+                }
+            }else
+            if (MainActivity.prefs.getString("operation",null) == "Division"){
+                if (i == MainActivity.prefs.getInt("diviLevel",1)){
+                    holder.num_level.setText("");
+                }
             }
         }
 
