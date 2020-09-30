@@ -57,11 +57,19 @@ public class MainActivity extends AppCompatActivity {
                View cView = (View) inflater.inflate(R.layout.activity_settings, null);
                SeekBar seekBar= cView.findViewById(R.id.seekBar);
                Button resetGame = cView.findViewById(R.id.resetGame);
+               Button applySetting = cView.findViewById(R.id.applySetting);
                seekBar.setMax(maxVolume);
                seekBar.setProgress(currentVolume);
                cdialog.setCanceledOnTouchOutside(true);
                cdialog.setCancelable(false);
                cdialog.setView(cView);
+
+               applySetting.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       cdialog.dismiss();
+                   }
+               });
 
                resetGame.setOnClickListener(new View.OnClickListener() {
                    @Override
