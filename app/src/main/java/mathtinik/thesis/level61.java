@@ -15,29 +15,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class levels extends AppCompatActivity {
+public class level61 extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    levelAdapter levelAdapter;
+    level61Adapter levelAdapter;
     ImageView backtoChoose;
     TextView coinCount,selectOperation;
 
-    String[] level1_30 = {
-            "1","2","3","4","5",
-            "6","7","8","9","10",
-            "11","12","13","14","15",
-            "16","17","18","19","20",
-            "21","22","23","24","25",
-            "26","27","28","29","30"
+    String[] level61_90 = {
+            "61","62","63","64","65",
+            "66","67","68","69","70",
+            "71","72","73","74","75",
+            "76","77","78","79","70",
+            "71","72","73","74","75",
+            "77","78","79","80","81",
+            "82","83","84","85","86",
+            "87","88","89","90"
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_levels);
+        setContentView(R.layout.level61);
 
-        
+
+
 
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -45,20 +48,18 @@ public class levels extends AppCompatActivity {
         selectOperation = findViewById(R.id.selectOperation);
         layoutManager=new GridLayoutManager(this,5);
         recyclerView.setLayoutManager(layoutManager);
-                levelAdapter=new levelAdapter(level1_30, levels.this);
-                recyclerView.setAdapter(levelAdapter);
-                levelAdapter.notifyDataSetChanged();
+        levelAdapter=new level61Adapter(level61_90, level61.this);
+        recyclerView.setAdapter(levelAdapter);
+        levelAdapter.notifyDataSetChanged();
 
         recyclerView.setHasFixedSize(true);
         selectOperation.setText(MainActivity.prefs.getString("operation",null));
-
         coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
-
         backtoChoose = findViewById(R.id.backtoChooseLevel);
 
         backtoChoose.setOnClickListener(new View.OnClickListener(){
             @Override
-                    public void onClick(View v){
+            public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(),level_choice.class);
                 startActivity(intent);
                 finish();
@@ -66,7 +67,6 @@ public class levels extends AppCompatActivity {
         });
 
     }
-
 
 
     @Override
@@ -78,6 +78,7 @@ public class levels extends AppCompatActivity {
         return false;
         // Disable back button..............
     }
+
 
 
 

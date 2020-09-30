@@ -15,29 +15,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class levels extends AppCompatActivity {
+public class level31 extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    levelAdapter levelAdapter;
+    level31Adapter levelAdapter;
     ImageView backtoChoose;
     TextView coinCount,selectOperation;
 
-    String[] level1_30 = {
-            "1","2","3","4","5",
-            "6","7","8","9","10",
-            "11","12","13","14","15",
-            "16","17","18","19","20",
-            "21","22","23","24","25",
-            "26","27","28","29","30"
+    String[] level31_60 = {
+            "31","32","33","34","35",
+            "36","37","38","39","40",
+            "41","42","43","44","45",
+            "56","57","58","59","60",
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_levels);
+        setContentView(R.layout.level31);
 
-        
+
+
 
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -45,20 +44,18 @@ public class levels extends AppCompatActivity {
         selectOperation = findViewById(R.id.selectOperation);
         layoutManager=new GridLayoutManager(this,5);
         recyclerView.setLayoutManager(layoutManager);
-                levelAdapter=new levelAdapter(level1_30, levels.this);
+                levelAdapter=new level31Adapter(level31_60, level31.this);
                 recyclerView.setAdapter(levelAdapter);
                 levelAdapter.notifyDataSetChanged();
 
         recyclerView.setHasFixedSize(true);
         selectOperation.setText(MainActivity.prefs.getString("operation",null));
-
         coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
-
         backtoChoose = findViewById(R.id.backtoChooseLevel);
 
         backtoChoose.setOnClickListener(new View.OnClickListener(){
             @Override
-                    public void onClick(View v){
+            public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(),level_choice.class);
                 startActivity(intent);
                 finish();
@@ -66,9 +63,6 @@ public class levels extends AppCompatActivity {
         });
 
     }
-
-
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK)
@@ -78,6 +72,10 @@ public class levels extends AppCompatActivity {
         return false;
         // Disable back button..............
     }
+
+
+
+
 
 
 

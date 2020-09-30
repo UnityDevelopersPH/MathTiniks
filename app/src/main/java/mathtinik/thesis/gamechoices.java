@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ public class gamechoices extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamechoices);
+        View decorView = getWindow().getDecorView();
+
 
         add = findViewById(R.id.addition);
         subtracts = findViewById(R.id.subtraction);
@@ -30,6 +34,14 @@ public class gamechoices extends AppCompatActivity {
         choicex = findViewById(R.id.choicex);
 
         mathematicsGroupBtn();
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -98,6 +110,15 @@ public class gamechoices extends AppCompatActivity {
             default:
                 break;
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode== KeyEvent.KEYCODE_BACK)
+            Toast.makeText(getApplicationContext(), "back press",
+                    Toast.LENGTH_LONG).show();
+
+        return false;
+        // Disable back button..............
     }
 
 

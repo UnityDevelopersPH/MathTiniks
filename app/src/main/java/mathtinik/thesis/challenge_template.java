@@ -11,10 +11,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.icu.util.LocaleData;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -45,12 +47,15 @@ public class challenge_template extends AppCompatActivity {
     int coinCounts;
     TextView checkCount,wrongCount,coinCount;
     ImageView life_one,life_two,life_three;
+    ImageView backbtn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_template);
+        View decorView = getWindow().getDecorView();
+
         question_One = findViewById(R.id.question_One);
         ans1 = findViewById(R.id.ans1);
         ans2 = findViewById(R.id.ans2);
@@ -64,6 +69,7 @@ public class challenge_template extends AppCompatActivity {
         life_one = findViewById(R.id.life_one);
         life_two = findViewById(R.id.life_two);
         life_three = findViewById(R.id.life_three);
+        backbtn = findViewById(R.id.backBtn);
 
         question_Two = findViewById(R.id.question_Two);
 
@@ -76,6 +82,15 @@ public class challenge_template extends AppCompatActivity {
         ans4.setOnLongClickListener(longClickListener);
 
         targetAns.setOnDragListener(dragListener);
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),levels.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         generateQuestion();
         submitBtn();
@@ -184,44 +199,87 @@ public class challenge_template extends AppCompatActivity {
 
 
     public void generateQuestion(){
-        Random rand= new Random();
-       int answer=0;
-        int threeWrongAnswers=0;
-        num1 = rand.nextInt(10)+1;
-        num2 = rand.nextInt(10)+1;
-        if (MainActivity.prefs.getString("operation",null) == "Addition"){
-           answer = num1 + num2;
-        }else if(MainActivity.prefs.getString("operation",null) == "Subraction"){
-            answer = num1 - num2;
-        }else if(MainActivity.prefs.getString("operation",null) == "Multiplication"){
-            answer = num1 * num2;
-        }else if(MainActivity.prefs.getString("operation",null) == "Division"){
-            answer = num1 / num2;
-        }
-        question_One.setText(Integer.toString(num1));
-        question_Two.setText(Integer.toString(num2));
-        answers.add(Math.abs(answer));
-        answers.add(Math.abs(answer+1));
-        answers.add(Math.abs(answer+2));
-        answers.add(Math.abs(answer-1));
-        Collections.shuffle(answers);
 
-        for(int x = 0;x<answers.size();x++){
-            if (answer == answers.get(x)){
-                locatiionOfCorrectAnswer = x;
-            }
-        }
+       String w = wrongCount.getText().toString();
+       String c = checkCount.getText().toString();
+       int i = Integer.parseInt(w) + Integer.parseInt(c);
+       if (i == 30){
+           final AlertDialog gdialog = new AlertDialog.Builder(challenge_template.this).create();
+           LayoutInflater ginflater = getLayoutInflater();
+           View gView = (View) ginflater.inflate(R.layout.gameover, null);
+           TextView getCoins = gView.findViewById(R.id.getCoins);
+           Button close_gameover = gView.findViewById(R.id.close_gameover);
+           getCoins.setText(checkCount.getText().toString());
+           gdialog.setView(gView);
 
-        ans1.setText(Integer.toString(answers.get(0)));
-        ans2.setText(Integer.toString(answers.get(1)));
-        ans3.setText(Integer.toString(answers.get(2)));
-        ans4.setText(Integer.toString(answers.get(3)));
+           close_gameover.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent backToHome = new Intent(challenge_template.this,gamechoices.class);
+                   startActivity(backToHome);
+               }
+           });
+           gdialog.setCanceledOnTouchOutside(true);
+           gdialog.setCancelable(false);
 
-        Log.d("showError",Integer.toString(answers.get(0))+Integer.toString(answers.get(1)));
+           gdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
 
-        answers.clear();
+           gdialog.show();
 
 
+       }else{
+
+           Random rand= new Random();
+           int answer=0;
+           int threeWrongAnswers=0;
+           num1 = rand.nextInt(10)+1;
+           num2 = rand.nextInt(10)+1;
+           if (MainActivity.prefs.getString("operation",null) == "Addition"){
+               answer = num1 + num2;
+           }else if(MainActivity.prefs.getString("operation",null) == "Subraction"){
+               answer = num1 - num2;
+           }else if(MainActivity.prefs.getString("operation",null) == "Multiplication"){
+               answer = num1 * num2;
+           }else if(MainActivity.prefs.getString("operation",null) == "Division"){
+               answer = num1 / num2;
+           }
+           question_One.setText(Integer.toString(num1));
+           question_Two.setText(Integer.toString(num2));
+           answers.add(Math.abs(answer));
+           answers.add(Math.abs(answer+1));
+           answers.add(Math.abs(answer+2));
+           answers.add(Math.abs(answer-1));
+           Collections.shuffle(answers);
+
+           for(int x = 0;x<answers.size();x++){
+               if (answer == answers.get(x)){
+                   locatiionOfCorrectAnswer = x;
+               }
+           }
+
+           ans1.setText(Integer.toString(answers.get(0)));
+           ans2.setText(Integer.toString(answers.get(1)));
+           ans3.setText(Integer.toString(answers.get(2)));
+           ans4.setText(Integer.toString(answers.get(3)));
+           Log.d("showError",Integer.toString(answers.get(0))+Integer.toString(answers.get(1)));
+
+           answers.clear();
+
+       }
+
+
+
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode== KeyEvent.KEYCODE_BACK)
+            Toast.makeText(getApplicationContext(), "back press",
+                    Toast.LENGTH_LONG).show();
+
+        return false;
+        // Disable back button..............
     }
 
     public void submitBtn(){
@@ -229,6 +287,11 @@ public class challenge_template extends AppCompatActivity {
        submitBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+
+               ans1.setVisibility(View.VISIBLE);
+               ans2.setVisibility(View.VISIBLE);
+               ans3.setVisibility(View.VISIBLE);
+               ans4.setVisibility(View.VISIBLE);
 
                int Fnum1 = Integer.parseInt(question_One.getText().toString());
                int Fnum2 = Integer.parseInt(question_Two.getText().toString());
@@ -255,26 +318,30 @@ public class challenge_template extends AppCompatActivity {
                            checkCount.setText(String.valueOf(checkCounts));
                            int getCoins = Integer.parseInt(coinCount.getText().toString());
                            getCoins++;
-                               if (MainActivity.prefs.getString("operation",null) == "Addition"){
-                                   int getLevelUnlock = MainActivity.prefs.getInt("addLevel",1);
-                                   getLevelUnlock++;
-                                   MainActivity.editor.putInt("addLevel", getLevelUnlock);
-                               }else
-                               if (MainActivity.prefs.getString("operation",null) == "Subraction"){
-                                   int getLevelUnlock = MainActivity.prefs.getInt("subLevel",1);
-                                   getLevelUnlock++;
-                                   MainActivity.editor.putInt("subLevel", getLevelUnlock);
-                               }else
-                               if (MainActivity.prefs.getString("operation",null) == "Multiplication"){
-                                   int getLevelUnlock = MainActivity.prefs.getInt("mulLevel",1);
-                                   getLevelUnlock++;
-                                   MainActivity.editor.putInt("mulLevel", getLevelUnlock);
-                               }else
-                               if (MainActivity.prefs.getString("operation",null) == "Division"){
-                                   int getLevelUnlock = MainActivity.prefs.getInt("diviLevel",1);
-                                   getLevelUnlock++;
-                                   MainActivity.editor.putInt("diviLevel", getLevelUnlock);
-                               }
+                   if (MainActivity.prefs.getString("operation",null) == "Addition"){
+                       int getLevelUnlock = MainActivity.prefs.getInt("addLevel",1);
+                       getLevelUnlock++;
+                       MainActivity.editor.putInt("addLevel", getLevelUnlock);
+                       MainActivity.editor.apply();
+                   }else
+                   if (MainActivity.prefs.getString("operation",null) == "Subraction"){
+                       int getLevelUnlock = MainActivity.prefs.getInt("subLevel",1);
+                       getLevelUnlock++;
+                       MainActivity.editor.putInt("subLevel", getLevelUnlock);
+                       MainActivity.editor.apply();
+                   }else
+                   if (MainActivity.prefs.getString("operation",null) == "Multiplication"){
+                       int getLevelUnlock = MainActivity.prefs.getInt("mulLevel",1);
+                       getLevelUnlock++;
+                       MainActivity.editor.putInt("mulLevel", getLevelUnlock);
+                       MainActivity.editor.apply();
+                   }else
+                   if (MainActivity.prefs.getString("operation",null) == "Division"){
+                       int getLevelUnlock = MainActivity.prefs.getInt("diviLevel",1);
+                       getLevelUnlock++;
+                       MainActivity.editor.putInt("diviLevel", getLevelUnlock);
+                       MainActivity.editor.apply();
+                   }
                            MainActivity.editor.putInt("Coins", getCoins);
                            MainActivity.editor.apply();
                    final AlertDialog cdialog = new AlertDialog.Builder(challenge_template.this).create();
@@ -297,7 +364,6 @@ public class challenge_template extends AppCompatActivity {
                    handler.postDelayed(r, 1000);
                            coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
                            targetAns.setText("");
-                           generateQuestion();
 
                        }else{
                            wrongCounts++;
@@ -333,7 +399,7 @@ public class challenge_template extends AppCompatActivity {
                                life_two.setVisibility(View.GONE);
                                final AlertDialog gdialog = new AlertDialog.Builder(challenge_template.this).create();
                                LayoutInflater ginflater = getLayoutInflater();
-                               View gView = (View) inflater.inflate(R.layout.gameover, null);
+                               View gView = (View) ginflater.inflate(R.layout.gameover, null);
                                TextView getCoins = gView.findViewById(R.id.getCoins);
                                Button close_gameover = gView.findViewById(R.id.close_gameover);
                                getCoins.setText(checkCount.getText().toString());
