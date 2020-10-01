@@ -27,7 +27,6 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.body_level,parent,false);
         LevelHolder levelHolder = new LevelHolder(view,context,arr);
 
-
         return levelHolder;
     }
 

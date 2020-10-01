@@ -10,7 +10,9 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
         android:textColor="@color/design_default_color_primary_dark"
         android:text="Are you sure you want to reset your game?"/>
 
@@ -26,7 +28,7 @@
             android:textColor="@color/colorWhite"
             android:padding="10dp"
             android:layout_weight="1.0"
-            style="@style/AppTheme.RoundedCornerMaterialButton"
+            android:background="@color/colorDarkRed"
             android:text="No"/>
         <Button
             android:id="@+id/yes"
@@ -36,7 +38,7 @@
             android:textColor="@color/colorWhite"
             android:padding="10dp"
             android:layout_weight="1.0"
-            style="@style/AppTheme.RoundedCornerMaterialButton"
+            android:background="@color/colorGreen"
             android:text="Yes"/>
 
     </LinearLayout>

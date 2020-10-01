@@ -96,6 +96,7 @@
         android:layout_weight="8"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="25dp"
         android:padding="5dp">
 
         <!-- i loop mo na lang tong cardview sa 30 -->

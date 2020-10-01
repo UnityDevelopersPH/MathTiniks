@@ -18,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Reset"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/radius"
         android:layout_marginTop="20dp"
         android:layout_weight="1"/>
 
@@ -25,6 +27,8 @@
         android:id="@+id/applySetting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/answer_correct"
+        android:textColor="@color/colorWhite"
         android:text="Apply"
         android:layout_marginTop="20dp"
         android:layout_weight="1"/>

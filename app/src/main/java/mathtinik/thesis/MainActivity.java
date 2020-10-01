@@ -153,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
                 yesExit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
                         System.exit(0);
                     }
                 });
