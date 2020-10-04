@@ -143,11 +143,11 @@
 
                     <ImageView
                         android:id="@+id/hint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:padding="10dp"
                         android:layout_gravity=""
-                        android:background="@drawable/wrong"
+                        android:background="@drawable/hint"
                         />
 
                 </LinearLayout>

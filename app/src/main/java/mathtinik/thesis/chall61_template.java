@@ -20,6 +20,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ import java.util.Random;
 public class chall61_template extends AppCompatActivity {
 
     ArrayList<Integer> answers = new ArrayList<>();
-    ObjectAnimator anim;
+    Animation animBlink,animShake;
     int locatiionOfCorrectAnswer;
     int num1;
     int num2;
@@ -47,7 +48,7 @@ public class chall61_template extends AppCompatActivity {
     int coinCounts;
     TextView checkCount,wrongCount,coinCount;
     ImageView life_one,life_two,life_three;
-    ImageView backBtn;
+    ImageView backBtn,hint;
 
 
     @Override
@@ -69,6 +70,7 @@ public class chall61_template extends AppCompatActivity {
         life_two = findViewById(R.id.life_two);
         life_three = findViewById(R.id.life_three);
         backBtn = findViewById(R.id.backBtn);
+        hint = findViewById(R.id.hint);
 
         question_Two = findViewById(R.id.question_Two);
 
@@ -81,6 +83,12 @@ public class chall61_template extends AppCompatActivity {
         ans4.setOnLongClickListener(longClickListener);
 
         targetAns.setOnDragListener(dragListener);
+
+        animBlink = AnimationUtils.loadAnimation(chall61_template.this,
+                R.anim.blinking_effect);
+        animShake = AnimationUtils.loadAnimation(chall61_template.this, R.anim.shaking);
+        hint.startAnimation(animShake);
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +115,41 @@ public class chall61_template extends AppCompatActivity {
         }else if(MainActivity.prefs.getString("operation",null) == "Division"){
             operation.setText("÷");
         }
+
+        hint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int hintAns = 0;
+
+                if (MainActivity.prefs.getInt("Coins", 0) >= 5) {
+                    int getCurrentCoins = MainActivity.prefs.getInt("Coins", 0) - 5;
+                    MainActivity.editor.putInt("Coins", getCurrentCoins);
+                    MainActivity.editor.apply();
+                    coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins", 0)));
+                    if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                        hintAns = Integer.parseInt(question_One.getText().toString()) + Integer.parseInt(question_Two.getText().toString());
+                    } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                        hintAns = Integer.parseInt(question_One.getText().toString()) - Integer.parseInt(question_Two.getText().toString());
+                    } else if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                        hintAns = Integer.parseInt(question_One.getText().toString()) * Integer.parseInt(question_Two.getText().toString());
+                    } else if (MainActivity.prefs.getString("operation", null) == "Division") {
+                        hintAns = Integer.parseInt(question_One.getText().toString()) / Integer.parseInt(question_Two.getText().toString());
+                    }
+
+                    if (ans1.getText().toString().equals(String.valueOf(hintAns))) {
+                        ans1.startAnimation(animBlink);
+                    } else if (ans2.getText().toString().equals(String.valueOf(hintAns))) {
+                        ans2.startAnimation(animBlink);
+
+                    } else if (ans3.getText().toString().equals(String.valueOf(hintAns))) {
+                        ans3.startAnimation(animBlink);
+                    } else if (ans4.getText().toString().equals(String.valueOf(hintAns))) {
+                        ans4.startAnimation(animBlink);
+                    }
+
+                }
+            }
+        });
 
 
     }
@@ -237,8 +280,13 @@ public class chall61_template extends AppCompatActivity {
             Random rand = new Random();
             int answer = 0;
             int threeWrongAnswers = 0;
-            num1 = rand.nextInt(60) + 1;
-            num2 = rand.nextInt(90) + 1;
+            if (MainActivity.prefs.getString("operation",null) == "Division"){
+                num1 = rand.nextInt(10)*4;
+                num2 = 4;
+            }else{
+                num1 = rand.nextInt(60) + 1;
+                num2 = rand.nextInt(90) + 1;
+            }
             if (MainActivity.prefs.getString("operation", null) == "Addition") {
                 answer = num1 + num2;
             } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
@@ -283,6 +331,10 @@ public class chall61_template extends AppCompatActivity {
                 ans2.setVisibility(View.VISIBLE);
                 ans3.setVisibility(View.VISIBLE);
                 ans4.setVisibility(View.VISIBLE);
+                ans1.clearAnimation();
+                ans2.clearAnimation();
+                ans3.clearAnimation();
+                ans4.clearAnimation();
 
                 int Fnum1 = Integer.parseInt(question_One.getText().toString());
                 int Fnum2 = Integer.parseInt(question_Two.getText().toString());
