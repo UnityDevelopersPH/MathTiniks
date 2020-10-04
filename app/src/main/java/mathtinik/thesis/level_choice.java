@@ -6,13 +6,21 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.security.Key;
 
 public class level_choice extends AppCompatActivity {
 
@@ -23,8 +31,8 @@ public class level_choice extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_choice);
-        UI();
 
+        UI();
 
         if(MainActivity.prefs.getInt("level2unlock",0) == 2){
             level2.setImageResource(R.drawable.level_two);
@@ -37,6 +45,8 @@ public class level_choice extends AppCompatActivity {
         level1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.editor.putString("selectlevel","level1");
+                MainActivity.editor.commit();
                 Intent intent = new Intent(getApplicationContext(),levels.class);
                 startActivity(intent);
 
@@ -52,23 +62,36 @@ public class level_choice extends AppCompatActivity {
                     View cView = (View) inflater.inflate(R.layout.activity_unlock, null);
                     Button unlockBtn = cView.findViewById(R.id.unclock);
                     cdialog.setView(cView);
+                    cdialog.setCanceledOnTouchOutside(true);
+                    cdialog.setCancelable(false);
                     cdialog.show();
                     unlockBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                           if (MainActivity.prefs.getInt("Coins",0) >= 2){
+                           if (MainActivity.prefs.getInt("Coins",0) >= 25){
+                               int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 25;
+                               MainActivity.editor.putInt("Coins",getCurrentCoins);
                                MainActivity.editor.putInt("level2unlock",2);
                                MainActivity.editor.apply();
+                               cdialog.dismiss();
+                               Intent intent = new Intent(getApplicationContext(),level_choice.class);
+                               startActivity(intent);
+                               finish();
+
                            }else{
-                               Toast.makeText(level_choice.this, "mababa pa ang pera mo", Toast.LENGTH_SHORT).show();
+                               Toast.makeText(level_choice.this, "Your coins is not enough", Toast.LENGTH_SHORT).show();
+                               cdialog.dismiss();
+
                            }
                         }
                     });
 
                 }else{
+                    MainActivity.editor.putString("selectlevel","level31");
+                    MainActivity.editor.commit();
 
-                    Toast.makeText(level_choice.this, "Pumunta sa ibang syudad", Toast.LENGTH_SHORT).show();
-
+                    Intent intent = new Intent(getApplicationContext(),level31.class);
+                    startActivity(intent);
                 }
 
 
@@ -85,24 +108,33 @@ public class level_choice extends AppCompatActivity {
                     View cView = (View) inflater.inflate(R.layout.activity_unlock, null);
                     Button unlockBtn = cView.findViewById(R.id.unclock);
                     cdialog.setView(cView);
+                    cdialog.setCancelable(false);
+                    cdialog.setCanceledOnTouchOutside(true);
                     cdialog.show();
                     unlockBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (MainActivity.prefs.getInt("Coins",0) >= 2){
+                            if (MainActivity.prefs.getInt("Coins",0) >= 25){
+                                int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 25;
+                                MainActivity.editor.putInt("Coins",getCurrentCoins);
                                 MainActivity.editor.putInt("level3unlock",3);
                                 MainActivity.editor.apply();
                                 cdialog.dismiss();
+                                Intent intent = new Intent(getApplicationContext(),level_choice.class);
+                                startActivity(intent);
+                                finish();
                             }else{
-                                Toast.makeText(level_choice.this, "mababa pa ang pera mo", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(level_choice.this, "Your coins is not enough", Toast.LENGTH_SHORT).show();
+                                cdialog.dismiss();
                             }
                         }
                     });
 
                 }else{
-
-                    Toast.makeText(level_choice.this, "Pumunta sa ibang syudad", Toast.LENGTH_SHORT).show();
-
+                    MainActivity.editor.putString("selectlevel","level61");
+                    MainActivity.editor.commit();
+                    Intent intent = new Intent(getApplicationContext(),level61.class);
+                    startActivity(intent);
                 }
 
             }
@@ -118,6 +150,15 @@ public class level_choice extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode== KeyEvent.KEYCODE_BACK)
+            Toast.makeText(getApplicationContext(), "back press",
+                    Toast.LENGTH_LONG).show();
+
+        return false;
     }
 
     public void UI(){

@@ -96,7 +96,6 @@
         android:layout_weight="8"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="25dp"
         android:padding="5dp">
 
         <!-- i loop mo na lang tong cardview sa 30 -->
@@ -107,10 +106,8 @@
             android:id="@+id/recyclerView"
             android:scrollbars="vertical"/>
 
-        <include
-            layout="@layout/body_level"
-            android:layout_row="0"
-            android:layout_column="1" />
+        <include layout="@layout/body_level"/>
+
 
 
     </GridLayout>

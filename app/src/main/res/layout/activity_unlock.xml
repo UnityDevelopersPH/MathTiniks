@@ -41,9 +41,9 @@
             android:textColor="@color/colorWhite"
             android:padding="10dp"
             style="@style/AppTheme.RoundedCornerMaterialButton"
-            android:text="Unlock Now - 120 Coins"/>
+            android:text="Unlock Now - 25 Coins"/>
 
-
+s
     </LinearLayout>
 
 

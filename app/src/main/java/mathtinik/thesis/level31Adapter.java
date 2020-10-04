@@ -11,12 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder> {
+public class level31Adapter extends RecyclerView.Adapter<level31Adapter.LevelHolder> {
 
     Context context;
     String[] arr;
 
-    public levelAdapter(String[] arr,Context context) {
+    public level31Adapter(String[] arr,Context context) {
         this.arr = arr;
         this.context = context;
     }
@@ -26,6 +26,7 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
     public LevelHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.body_level,parent,false);
         LevelHolder levelHolder = new LevelHolder(view,context,arr);
+
 
         return levelHolder;
     }
@@ -37,22 +38,22 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
         String getNumLevel = holder.num_level.getText().toString();
         for (int i = 0; i<Integer.parseInt(getNumLevel);i++){
             if (MainActivity.prefs.getString("operation",null) == "Addition"){
-                if (i == MainActivity.prefs.getInt("addLevel",1)){
+                if (i == MainActivity.prefs.getInt("31addLevel",31)){
                     holder.num_level.setText("");
                 }
             }else
             if (MainActivity.prefs.getString("operation",null) == "Subraction"){
-                if (i == MainActivity.prefs.getInt("subLevel",1)){
+                if (i == MainActivity.prefs.getInt("31subLevel",31)){
                     holder.num_level.setText("");
                 }
             }else
             if (MainActivity.prefs.getString("operation",null) == "Multiplication"){
-                if (i == MainActivity.prefs.getInt("mulLevel",1)){
+                if (i == MainActivity.prefs.getInt("31mulLevel",31)){
                     holder.num_level.setText("");
                 }
             }else
             if (MainActivity.prefs.getString("operation",null) == "Division"){
-                if (i == MainActivity.prefs.getInt("diviLevel",1)){
+                if (i == MainActivity.prefs.getInt("31diviLevel",31)){
                     holder.num_level.setText("");
                 }
             }
@@ -84,7 +85,7 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
         public void onClick(View v) {
 
             if (!num_level.getText().toString().equals("")){
-                Intent intent = new Intent(context,challenge_template.class);
+                Intent intent = new Intent(context,chall31_template.class);
                 context.startActivity(intent);
             }else{
                 Log.d("results","Please Unlock");

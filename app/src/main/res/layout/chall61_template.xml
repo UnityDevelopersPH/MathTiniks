@@ -8,13 +8,13 @@
     android:orientation="vertical"
     tools:context=".challenge_template">
 
-        <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back"
-            android:layout_margin="5dp"
-            />
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:layout_margin="5dp"
+        />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -143,11 +143,11 @@
 
                     <ImageView
                         android:id="@+id/hint"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:layout_gravity=""
-                        android:background="@drawable/hint"
+                        android:background="@drawable/wrong"
                         />
 
                 </LinearLayout>
