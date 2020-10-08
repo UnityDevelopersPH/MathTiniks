@@ -92,7 +92,7 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
             case R.id.easys:
                 if (getMath.equals("Addition")){
                     MainActivity.editor.putString("operation","Addition");
-                    MainActivity.editor.apply();
+                    MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     ActivityCode(level_choice.class);
                 }else if(getMath.equals("Subraction")){

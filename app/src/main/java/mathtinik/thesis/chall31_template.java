@@ -317,6 +317,15 @@ public class chall31_template extends AppCompatActivity {
                 num1 = rand.nextInt(30) + 1;
                 num2 = rand.nextInt(60) + 1;
             }
+
+            if (num1 >= num2){
+                question_One.setText(Integer.toString(num1));
+                question_Two.setText(Integer.toString(num2));
+            }else{
+                question_One.setText(Integer.toString(num2));
+                question_Two.setText(Integer.toString(num1));
+            }
+
             if (MainActivity.prefs.getString("operation", null) == "Addition") {
                 answer = num1 + num2;
             } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
@@ -326,8 +335,7 @@ public class chall31_template extends AppCompatActivity {
             } else if (MainActivity.prefs.getString("operation", null) == "Division") {
                 answer = num1 / num2;
             }
-            question_One.setText(Integer.toString(num1));
-            question_Two.setText(Integer.toString(num2));
+
             answers.add(Math.abs(answer));
             answers.add(Math.abs(answer + 1));
             answers.add(Math.abs(answer + 3));

@@ -26,6 +26,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     ImageButton imgplay, exitapp;
+    private Intent serviceIntent;
     public static SharedPreferences.Editor editor;
     public static SharedPreferences prefs;
     AudioManager audioManager;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_main);
+       serviceIntent = new Intent(getApplicationContext(),MyService.class);
+       startService(new Intent(getApplicationContext(),MyService.class));
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
@@ -123,12 +126,6 @@ public class MainActivity extends AppCompatActivity {
        });
 
 
-        doBindService();
-        Intent music = new Intent();
-        music.setClass(this, MusicService.class);
-        startService(music);
-
-
 
         imgplay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,57 +163,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-    }
-
-    //Bind/Unbind music service
-    private boolean mIsBound = false;
-    private MusicService mServ;
-    private ServiceConnection Scon =new ServiceConnection(){
-
-        public void onServiceConnected(ComponentName name, IBinder
-                binder) {
-            mServ = ((MusicService.ServiceBinder)binder).getService();
-        }
-
-        public void onServiceDisconnected(ComponentName name) {
-            mServ = null;
-        }
-    };
-
-    void doBindService(){
-        bindService(new Intent(this,MusicService.class),
-                Scon, Context.BIND_AUTO_CREATE);
-        mIsBound = true;
-    }
-
-    void doUnbindService()
-    {
-        if(mIsBound)
-        {
-            unbindService(Scon);
-            mIsBound = false;
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (mServ != null) {
-            mServ.resumeMusic();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        //UNBIND music service
-        doUnbindService();
-        Intent music = new Intent();
-        music.setClass(this,MusicService.class);
-        stopService(music);
 
     }
 

@@ -9,10 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".MusicService"
-            android:enabled="true" />
-        
+
+        <service android:name=".MyService"/>
+
         <activity android:name=".unlock" />
         <activity android:name=".question_template" />
         <activity android:name=".challenge_template" />
