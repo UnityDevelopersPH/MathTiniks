@@ -281,11 +281,19 @@ public class chall61_template extends AppCompatActivity {
             int answer = 0;
             int threeWrongAnswers = 0;
             if (MainActivity.prefs.getString("operation",null) == "Division"){
-                num1 = rand.nextInt(10)*4;
+                num1 = rand.nextInt(100)*4;
                 num2 = 4;
             }else{
-                num1 = rand.nextInt(60) + 1;
-                num2 = rand.nextInt(90) + 1;
+                num1 = rand.nextInt(160) + 1;
+                num2 = rand.nextInt(190) + 1;
+            }
+
+            if (num1 >= num2){
+                question_One.setText(Integer.toString(num1));
+                question_Two.setText(Integer.toString(num2));
+            }else{
+                question_One.setText(Integer.toString(num2));
+                question_Two.setText(Integer.toString(num1));
             }
             if (MainActivity.prefs.getString("operation", null) == "Addition") {
                 answer = num1 + num2;
@@ -296,8 +304,7 @@ public class chall61_template extends AppCompatActivity {
             } else if (MainActivity.prefs.getString("operation", null) == "Division") {
                 answer = num1 / num2;
             }
-            question_One.setText(Integer.toString(num1));
-            question_Two.setText(Integer.toString(num2));
+
             answers.add(Math.abs(answer));
             answers.add(Math.abs(answer + 1));
             answers.add(Math.abs(answer + 3));

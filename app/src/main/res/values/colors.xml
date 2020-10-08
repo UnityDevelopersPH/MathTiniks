@@ -9,4 +9,5 @@
     <color name="colorLightRed">#e74c3c</color>
     <color name="colorDarkRed">#d63031</color>
     <color name="colorGreen"> #27ae60 </color>
+    <color name="whiteSmoke">#f5f5f5</color>
 </resources>

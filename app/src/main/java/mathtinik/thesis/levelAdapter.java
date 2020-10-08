@@ -2,13 +2,16 @@ package mathtinik.thesis;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder> {
@@ -38,7 +41,7 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
         for (int i = 0; i<Integer.parseInt(getNumLevel);i++){
             if (MainActivity.prefs.getString("operation",null) == "Addition"){
                 if (i == MainActivity.prefs.getInt("addLevel",1)){
-                    holder.num_level.setText("");
+                   holder.num_level.setText("");
                 }
             }else
             if (MainActivity.prefs.getString("operation",null) == "Subraction"){
@@ -87,7 +90,7 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
                 Intent intent = new Intent(context,challenge_template.class);
                 context.startActivity(intent);
             }else{
-                Log.d("results","Please Unlock");
+                Toast.makeText(context, "Lock", Toast.LENGTH_SHORT).show();
             }
 
         }
