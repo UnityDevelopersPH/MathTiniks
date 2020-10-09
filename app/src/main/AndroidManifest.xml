@@ -10,8 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name=".MyService"/>
-
         <activity android:name=".unlock" />
         <activity android:name=".question_template" />
         <activity android:name=".challenge_template" />

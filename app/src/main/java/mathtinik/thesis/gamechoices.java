@@ -114,7 +114,8 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
 
                 break;
             case R.id.mediums:
-                Log.d("w","success mediums");
+                Intent intent = new Intent(gamechoices.this,matching.class);
+                startActivity(intent);
                 break;
             case R.id.hards:
                 Log.d("ws","success hards");

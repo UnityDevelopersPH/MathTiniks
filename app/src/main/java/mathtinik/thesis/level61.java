@@ -23,16 +23,6 @@ public class level61 extends AppCompatActivity {
     ImageView backtoChoose;
     TextView coinCount,selectOperation;
 
-    String[] level61_90 = {
-            "61","62","63","64","65",
-            "66","67","68","69","70",
-            "71","72","73","74","75",
-            "76","77","78","79","70",
-            "71","72","73","74","75",
-            "77","78","79","80","81",
-            "82","83","84","85","86",
-            "87","88","89","90"
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +38,7 @@ public class level61 extends AppCompatActivity {
         selectOperation = findViewById(R.id.selectOperation);
         layoutManager=new GridLayoutManager(this,5);
         recyclerView.setLayoutManager(layoutManager);
-        levelAdapter=new level61Adapter(level61_90, level61.this);
+        levelAdapter=new level61Adapter(MainActivity.s_90, level61.this);
         recyclerView.setAdapter(levelAdapter);
         levelAdapter.notifyDataSetChanged();
 

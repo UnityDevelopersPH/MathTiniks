@@ -23,22 +23,37 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     ImageButton imgplay, exitapp;
-    private Intent serviceIntent;
     public static SharedPreferences.Editor editor;
     public static SharedPreferences prefs;
     AudioManager audioManager;
     ImageView settings;
     int maxVolume,currentVolume;
 
+    public static ArrayList<String> one_30;
+    public static ArrayList<String> t_60;
+    public static ArrayList<String> s_90;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_main);
-       serviceIntent = new Intent(getApplicationContext(),MyService.class);
-       startService(new Intent(getApplicationContext(),MyService.class));
+        one_30 = new ArrayList<>();
+        t_60 = new ArrayList<>();
+        s_90 = new ArrayList<>();
+        for (int i = 1; i<=30;i++){
+            one_30.add(""+i);
+        }
+
+        for (int t = 31; t<=60;t++){
+            t_60.add(""+t);
+        }
+        for (int s = 61; s<=90;s++){
+            s_90.add(""+s);
+        }
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
