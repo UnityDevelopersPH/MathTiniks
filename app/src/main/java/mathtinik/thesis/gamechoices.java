@@ -31,6 +31,8 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
         setContentView(R.layout.activity_gamechoices);
         View decorView = getWindow().getDecorView();
 
+        MainActivity.editor.remove("operation").commit();
+
 
         add = findViewById(R.id.addition);
         subtracts = findViewById(R.id.subtraction);
@@ -115,6 +117,8 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
                 }
+
+                MainActivity.editor.remove("getLevelSelected").commit();
 
                 break;
             case R.id.mediums:
