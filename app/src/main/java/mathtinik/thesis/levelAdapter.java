@@ -97,7 +97,6 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
                 context.startActivity(intent);
                 MainActivity.editor.putInt("getLevelSelected",Integer.parseInt(num_level.getText().toString()));
                 MainActivity.editor.commit();
-                Log.d("resultBug",""+MainActivity.prefs.getInt("getLevelSelected",0));
             }else{
                 Toast.makeText(context, "Lock", Toast.LENGTH_SHORT).show();
             }

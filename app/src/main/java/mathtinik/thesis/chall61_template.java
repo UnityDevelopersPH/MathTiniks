@@ -393,6 +393,8 @@ public class chall61_template extends AppCompatActivity {
                         coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins", 0)));
                         targetAns.setText("");
                     lvlCount++;
+                    MainActivity.editor.putInt("getLevelSelected",lvlCount);
+                    MainActivity.editor.commit();
 
                     if (lvlCount == 91){
                         final AlertDialog gdialog = new AlertDialog.Builder(chall61_template.this).create();
