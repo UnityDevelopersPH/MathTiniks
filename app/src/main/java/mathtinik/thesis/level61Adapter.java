@@ -11,12 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class level61Adapter extends RecyclerView.Adapter<level61Adapter.LevelHolder> {
 
     Context context;
-    String[] arr;
+    ArrayList<String> arr;
 
-    public level61Adapter(String[] arr,Context context) {
+    public level61Adapter(ArrayList<String> arr,Context context) {
         this.arr = arr;
         this.context = context;
     }
@@ -34,7 +36,7 @@ public class level61Adapter extends RecyclerView.Adapter<level61Adapter.LevelHol
     @Override
     public void onBindViewHolder(@NonNull LevelHolder holder, int position) {
 
-        holder.num_level.setText(arr[position]);
+        holder.num_level.setText(arr.get(position));
         String getNumLevel = holder.num_level.getText().toString();
         for (int i = 0; i<Integer.parseInt(getNumLevel);i++){
             if (MainActivity.prefs.getString("operation",null) == "Addition"){
@@ -63,16 +65,19 @@ public class level61Adapter extends RecyclerView.Adapter<level61Adapter.LevelHol
 
     @Override
     public int getItemCount() {
-        return arr.length;
+        if (arr == null)
+            return 0;
+        else
+            return  arr.size();
     }
 
     public class LevelHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView num_level;
         Context context;
-        String[] arr;
+        ArrayList<String> arr;
 
-        public LevelHolder(@NonNull View itemView, Context context,String[] arr) {
+        public LevelHolder(@NonNull View itemView, Context context, ArrayList<String> arr) {
             super(itemView);
             num_level=itemView.findViewById(R.id.level_num);
             itemView.setOnClickListener(this);
@@ -87,6 +92,8 @@ public class level61Adapter extends RecyclerView.Adapter<level61Adapter.LevelHol
             if (!num_level.getText().toString().equals("")){
                 Intent intent = new Intent(context,chall61_template.class);
                 context.startActivity(intent);
+                MainActivity.editor.putInt("getLevelSelected",Integer.parseInt(num_level.getText().toString()));
+                MainActivity.editor.commit();
             }else{
                 Log.d("results","Please Unlock");
             }

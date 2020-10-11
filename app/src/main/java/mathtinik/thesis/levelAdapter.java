@@ -14,12 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
 public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder> {
 
     Context context;
-    String[] arr;
+    ArrayList<String> arr;
 
-    public levelAdapter(String[] arr,Context context) {
+    public levelAdapter(ArrayList<String> arr, Context context) {
         this.arr = arr;
         this.context = context;
     }
@@ -36,7 +39,7 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
     @Override
     public void onBindViewHolder(@NonNull LevelHolder holder, int position) {
 
-        holder.num_level.setText(arr[position]);
+        holder.num_level.setText(arr.get(position));
         String getNumLevel = holder.num_level.getText().toString();
         for (int i = 0; i<Integer.parseInt(getNumLevel);i++){
             if (MainActivity.prefs.getString("operation",null) == "Addition"){
@@ -65,16 +68,19 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
 
     @Override
     public int getItemCount() {
-        return arr.length;
+        if (arr == null)
+            return 0;
+        else
+            return  arr.size();
     }
 
     public class LevelHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView num_level;
         Context context;
-        String[] arr;
+        ArrayList<String> arr;
 
-        public LevelHolder(@NonNull View itemView, Context context,String[] arr) {
+        public LevelHolder(@NonNull View itemView, Context context, ArrayList<String> arr) {
             super(itemView);
             num_level=itemView.findViewById(R.id.level_num);
             itemView.setOnClickListener(this);
@@ -89,6 +95,8 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
             if (!num_level.getText().toString().equals("")){
                 Intent intent = new Intent(context,challenge_template.class);
                 context.startActivity(intent);
+                MainActivity.editor.putInt("getLevelSelected",Integer.parseInt(num_level.getText().toString()));
+                MainActivity.editor.commit();
             }else{
                 Toast.makeText(context, "Lock", Toast.LENGTH_SHORT).show();
             }

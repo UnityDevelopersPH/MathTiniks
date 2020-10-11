@@ -31,6 +31,8 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
         setContentView(R.layout.activity_gamechoices);
         View decorView = getWindow().getDecorView();
 
+        MainActivity.editor.remove("operation").commit();
+
 
         add = findViewById(R.id.addition);
         subtracts = findViewById(R.id.subtraction);
@@ -94,27 +96,34 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
                     MainActivity.editor.putString("operation","Addition");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
-                    ActivityCode(level_choice.class);
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
                 }else if(getMath.equals("Subraction")){
                     MainActivity.editor.putString("operation","Subraction");
-                    MainActivity.editor.apply();
+                    MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
-                    ActivityCode(level_choice.class);
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
                 }else if(getMath.equals("Multiplication")){
                     MainActivity.editor.putString("operation","Multiplication");
-                    MainActivity.editor.apply();
+                    MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
-                    ActivityCode(level_choice.class);
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
                 }else if(getMath.equals("Division")){
                     MainActivity.editor.putString("operation","Division");
-                    MainActivity.editor.apply();
+                    MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
-                    ActivityCode(level_choice.class);
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
                 }
+
+                MainActivity.editor.remove("getLevelSelected").commit();
 
                 break;
             case R.id.mediums:
-                Log.d("w","success mediums");
+                Intent intent = new Intent(gamechoices.this,matching.class);
+                startActivity(intent);
                 break;
             case R.id.hards:
                 Log.d("ws","success hards");
@@ -137,11 +146,6 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
     public void getchoiceX(String mathematics){
         choicex.setText("");
         choicex.setText(mathematics);
-    }
-
-    public void ActivityCode(Class cls){
-        Intent intent = new Intent(getApplicationContext(),cls);
-        startActivity(intent);
     }
 
     @Override

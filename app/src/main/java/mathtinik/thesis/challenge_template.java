@@ -249,42 +249,25 @@ public class challenge_template extends AppCompatActivity {
 
     public void generateQuestion(){
 
-       String w = wrongCount.getText().toString();
-       String c = checkCount.getText().toString();
-       int i = Integer.parseInt(w) + Integer.parseInt(c);
-       if (i == 30){
-           final AlertDialog gdialog = new AlertDialog.Builder(challenge_template.this).create();
-           LayoutInflater ginflater = getLayoutInflater();
-           View gView = (View) ginflater.inflate(R.layout.gameover, null);
-           TextView getCoins = gView.findViewById(R.id.getCoins);
-           Button close_gameover = gView.findViewById(R.id.close_gameover);
-           getCoins.setText(checkCount.getText().toString());
-           gdialog.setView(gView);
-
-           close_gameover.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   Intent backToHome = new Intent(challenge_template.this,gamechoices.class);
-                   startActivity(backToHome);
-               }
-           });
-           gdialog.setCanceledOnTouchOutside(true);
-           gdialog.setCancelable(false);
-
-           gdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
-
-           gdialog.show();
-
-
-       }else{
 
            Random rand= new Random();
            int answer=0;
            int threeWrongAnswers=0;
-
+           int lvlCountFinal = MainActivity.prefs.getInt("getLevelSelected",0);
            if (MainActivity.prefs.getString("operation",null) == "Division"){
-               num1 = rand.nextInt(10)*2;
-               num2 = 2;
+               Log.d("yesSir",String.valueOf(lvlCountFinal));
+               if (lvlCountFinal >= 1 && lvlCountFinal <= 10) {
+                   num1 = rand.nextInt(10)*3;
+                   num2 = 3;
+               }
+               if (lvlCountFinal >= 11 && lvlCountFinal <= 20) {
+                   num1 = rand.nextInt(10)*6;
+                   num2 = 6;
+               }
+               if (lvlCountFinal >= 21 && lvlCountFinal <= 30) {
+                   num1 = rand.nextInt(10)*9;
+                   num2 = 9;
+               }
            }else{
                num1 = rand.nextInt(10)+1;
                num2 = rand.nextInt(10)+1;
@@ -330,11 +313,6 @@ public class challenge_template extends AppCompatActivity {
 
        }
 
-
-
-
-    }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK)
@@ -351,144 +329,166 @@ public class challenge_template extends AppCompatActivity {
            @Override
            public void onClick(View v) {
 
-               ans1.setVisibility(View.VISIBLE);
-               ans2.setVisibility(View.VISIBLE);
-               ans3.setVisibility(View.VISIBLE);
-               ans4.setVisibility(View.VISIBLE);
-               ans1.clearAnimation();
-               ans2.clearAnimation();
-               ans3.clearAnimation();
-               ans4.clearAnimation();
+                   ans1.setVisibility(View.VISIBLE);
+                   ans2.setVisibility(View.VISIBLE);
+                   ans3.setVisibility(View.VISIBLE);
+                   ans4.setVisibility(View.VISIBLE);
+                   ans1.clearAnimation();
+                   ans2.clearAnimation();
+                   ans3.clearAnimation();
+                   ans4.clearAnimation();
 
-               int Fnum1 = Integer.parseInt(question_One.getText().toString());
-               int Fnum2 = Integer.parseInt(question_Two.getText().toString());
-               int checkAns = 0;
-               if (MainActivity.prefs.getString("operation",null) == "Addition"){
-                   checkAns = Fnum1 + Fnum2;
-               }else if(MainActivity.prefs.getString("operation",null) == "Subraction"){
-                    checkAns = Fnum1 - Fnum2;
-               }else if(MainActivity.prefs.getString("operation",null) == "Multiplication"){
-                   checkAns = Fnum1 * Fnum2;
-               }else if(MainActivity.prefs.getString("operation",null) == "Division"){
-                   checkAns = Fnum1 / Fnum2;
-               }
+                   int Fnum1 = Integer.parseInt(question_One.getText().toString());
+                   int Fnum2 = Integer.parseInt(question_Two.getText().toString());
+                   int checkAns = 0;
+                   int lvlCount = MainActivity.prefs.getInt("getLevelSelected",0);
+                   if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                       checkAns = Fnum1 + Fnum2;
+                   } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                       checkAns = Fnum1 - Fnum2;
+                   } else if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                       checkAns = Fnum1 * Fnum2;
+                   } else if (MainActivity.prefs.getString("operation", null) == "Division") {
+                       checkAns = Fnum1 / Fnum2;
+                   }
 
-               Log.d("s",String.valueOf(checkAns));
+                   Log.d("s", String.valueOf(checkAns));
 
-               if (targetAns.getText().toString().equals("")) {
+                   if (targetAns.getText().toString().equals("")) {
 
-                   Toast.makeText(challenge_template.this, "Please Drag and Drop your Answer", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(challenge_template.this, "Please Drag and Drop your Answer", Toast.LENGTH_SHORT).show();
 
-               }else if (targetAns.getText().toString().equals(String.valueOf(checkAns))){
+                   } else if (targetAns.getText().toString().equals(String.valueOf(checkAns))) {
+
 
                            checkCounts++;
                            checkCount.setText(String.valueOf(checkCounts));
                            int getCoins = Integer.parseInt(coinCount.getText().toString());
                            getCoins++;
-                   if (MainActivity.prefs.getString("operation",null) == "Addition"){
-                       int getLevelUnlock = MainActivity.prefs.getInt("addLevel",1);
-                       getLevelUnlock++;
-                       MainActivity.editor.putInt("addLevel", getLevelUnlock);
-                       MainActivity.editor.apply();
-                   }else
-                   if (MainActivity.prefs.getString("operation",null) == "Subraction"){
-                       int getLevelUnlock = MainActivity.prefs.getInt("subLevel",1);
-                       getLevelUnlock++;
-                       MainActivity.editor.putInt("subLevel", getLevelUnlock);
-                       MainActivity.editor.apply();
-                   }else
-                   if (MainActivity.prefs.getString("operation",null) == "Multiplication"){
-                       int getLevelUnlock = MainActivity.prefs.getInt("mulLevel",1);
-                       getLevelUnlock++;
-                       MainActivity.editor.putInt("mulLevel", getLevelUnlock);
-                       MainActivity.editor.apply();
-                   }else
-                   if (MainActivity.prefs.getString("operation",null) == "Division"){
-                       int getLevelUnlock = MainActivity.prefs.getInt("diviLevel",1);
-                       getLevelUnlock++;
-                       MainActivity.editor.putInt("diviLevel", getLevelUnlock);
-                       MainActivity.editor.apply();
-                   }
+                           if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                               int getLevelUnlock = MainActivity.prefs.getInt("addLevel", 1);
+                               getLevelUnlock++;
+                               MainActivity.editor.putInt("addLevel", getLevelUnlock);
+                               MainActivity.editor.apply();
+                           } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                               int getLevelUnlock = MainActivity.prefs.getInt("subLevel", 1);
+                               getLevelUnlock++;
+                               MainActivity.editor.putInt("subLevel", getLevelUnlock);
+                               MainActivity.editor.apply();
+                           } else if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                               int getLevelUnlock = MainActivity.prefs.getInt("mulLevel", 1);
+                               getLevelUnlock++;
+                               MainActivity.editor.putInt("mulLevel", getLevelUnlock);
+                               MainActivity.editor.apply();
+                           } else if (MainActivity.prefs.getString("operation", null) == "Division") {
+                               int getLevelUnlock = MainActivity.prefs.getInt("diviLevel", 1);
+                               getLevelUnlock++;
+                               MainActivity.editor.putInt("diviLevel", getLevelUnlock);
+                               MainActivity.editor.apply();
+                           }
                            MainActivity.editor.putInt("Coins", getCoins);
                            MainActivity.editor.apply();
-                   final AlertDialog cdialog = new AlertDialog.Builder(challenge_template.this).create();
-                   LayoutInflater inflater = getLayoutInflater();
-                   View cView = (View) inflater.inflate(R.layout.correct, null);
-                   cdialog.setView(cView);
-                   cdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
-                   cdialog.setCanceledOnTouchOutside(true);
-                   cdialog.setCancelable(false);
-                   cdialog.show();
-                   final Handler handler = new Handler();
-                   final Runnable r = new Runnable()
-                   {
-                       public void run()
-                       {
-                           generateQuestion();
-                           cdialog.dismiss();
-                       }
-                   };
-                   handler.postDelayed(r, 1000);
-                           coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
-                           targetAns.setText("");
-
-                       }else{
-                           wrongCounts++;
-                           wrongCount.setText(String.valueOf(wrongCounts));
-                           targetAns.setText("");
-
-                           final AlertDialog wdialog = new AlertDialog.Builder(challenge_template.this).create();
+                           final AlertDialog cdialog = new AlertDialog.Builder(challenge_template.this).create();
                            LayoutInflater inflater = getLayoutInflater();
-                           View wView = (View) inflater.inflate(R.layout.wrong, null);
-                           wdialog.setView(wView);
-                           wdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
-                           wdialog.setCanceledOnTouchOutside(true);
-                           wdialog.setCancelable(false);
-                           wdialog.show();
+                           View cView = (View) inflater.inflate(R.layout.correct, null);
+                           cdialog.setView(cView);
+                           cdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
+                           cdialog.setCanceledOnTouchOutside(true);
+                           cdialog.setCancelable(false);
+                           cdialog.show();
                            final Handler handler = new Handler();
-                           final Runnable r = new Runnable()
-                           {
-                               public void run()
-                               {
+                           final Runnable r = new Runnable() {
+                               public void run() {
                                    generateQuestion();
-                                   wdialog.dismiss();
+                                   cdialog.dismiss();
                                }
                            };
                            handler.postDelayed(r, 1000);
+                           coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins", 0)));
+                           targetAns.setText("");
+                       lvlCount++;
+                       MainActivity.editor.putInt("getLevelSelected",lvlCount);
+                       MainActivity.editor.commit();
 
-                           if (wrongCount.getText().toString().equals("1")){
-                               life_one.setVisibility(View.GONE);
-                           }
-                           if (wrongCount.getText().toString().equals("2")){
-                               life_two.setVisibility(View.GONE);
-                           }
-                           if (wrongCount.getText().toString().equals("3")){
-                               life_two.setVisibility(View.GONE);
-                               final AlertDialog gdialog = new AlertDialog.Builder(challenge_template.this).create();
-                               LayoutInflater ginflater = getLayoutInflater();
-                               View gView = (View) ginflater.inflate(R.layout.gameover, null);
-                               TextView getCoins = gView.findViewById(R.id.getCoins);
-                               Button close_gameover = gView.findViewById(R.id.close_gameover);
-                               getCoins.setText(checkCount.getText().toString());
-                               gdialog.setView(gView);
+                       if (lvlCount == 31){
+                           final AlertDialog gdialog = new AlertDialog.Builder(challenge_template.this).create();
+                           LayoutInflater ginflater = getLayoutInflater();
+                           View gView = (View) ginflater.inflate(R.layout.gameover, null);
+                           TextView cgetCoins = gView.findViewById(R.id.getCoins);
+                           Button close_gameover = gView.findViewById(R.id.close_gameover);
+                           cgetCoins.setText(checkCount.getText().toString());
+                           gdialog.setView(gView);
 
-                               close_gameover.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
-                                       Intent backToHome = new Intent(challenge_template.this,gamechoices.class);
-                                       startActivity(backToHome);
-                                   }
-                               });
-                               gdialog.setCanceledOnTouchOutside(true);
-                               gdialog.setCancelable(false);
+                           close_gameover.setOnClickListener(new View.OnClickListener() {
+                               @Override
+                               public void onClick(View v) {
+                                   Intent backToHome = new Intent(challenge_template.this, gamechoices.class);
+                                   startActivity(backToHome);
+                               }
+                           });
+                           gdialog.setCanceledOnTouchOutside(true);
+                           gdialog.setCancelable(false);
 
-                               gdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
+                           gdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
 
-                               gdialog.show();
-                           }
-
+                           gdialog.show();
                        }
+
+                   } else {
+                       wrongCounts++;
+                       wrongCount.setText(String.valueOf(wrongCounts));
+                       targetAns.setText("");
+
+                       final AlertDialog wdialog = new AlertDialog.Builder(challenge_template.this).create();
+                       LayoutInflater inflater = getLayoutInflater();
+                       View wView = (View) inflater.inflate(R.layout.wrong, null);
+                       wdialog.setView(wView);
+                       wdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
+                       wdialog.setCanceledOnTouchOutside(true);
+                       wdialog.setCancelable(false);
+                       wdialog.show();
+                       final Handler handler = new Handler();
+                       final Runnable r = new Runnable() {
+                           public void run() {
+                               generateQuestion();
+                               wdialog.dismiss();
+                           }
+                       };
+                       handler.postDelayed(r, 1000);
+
+                       if (wrongCount.getText().toString().equals("1")) {
+                           life_one.setVisibility(View.GONE);
+                       }
+                       if (wrongCount.getText().toString().equals("2")) {
+                           life_two.setVisibility(View.GONE);
+                       }
+                       if (wrongCount.getText().toString().equals("3")) {
+                           life_two.setVisibility(View.GONE);
+                           final AlertDialog gdialog = new AlertDialog.Builder(challenge_template.this).create();
+                           LayoutInflater ginflater = getLayoutInflater();
+                           View gView = (View) ginflater.inflate(R.layout.gameover, null);
+                           TextView getCoins = gView.findViewById(R.id.getCoins);
+                           Button close_gameover = gView.findViewById(R.id.close_gameover);
+                           getCoins.setText(checkCount.getText().toString());
+                           gdialog.setView(gView);
+
+                           close_gameover.setOnClickListener(new View.OnClickListener() {
+                               @Override
+                               public void onClick(View v) {
+                                   Intent backToHome = new Intent(challenge_template.this, gamechoices.class);
+                                   startActivity(backToHome);
+                               }
+                           });
+                           gdialog.setCanceledOnTouchOutside(true);
+                           gdialog.setCancelable(false);
+
+                           gdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
+
+                           gdialog.show();
+                       }
+
                    }
+               }
 
        });
 
