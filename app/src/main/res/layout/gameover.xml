@@ -2,32 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal">
+    android:layout_height="match_parent"
+    android:background="@color/colorPastelRed"
+    android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@color/colorRed"
-            android:gravity="center_horizontal|center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="GAME OVER"
-                    android:textSize="30sp"
-                    android:letterSpacing="0.5"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorWhite"
-                    />
-
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GAME OVER"
+            android:textSize="40sp"
+            android:letterSpacing="0.3"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:background="@drawable/game_over"
             android:layout_margin="20dp"
             android:orientation="vertical"
             android:gravity="center_horizontal|center_vertical">
@@ -42,12 +34,6 @@
                     android:textColor="@color/colorWhite"
                     />
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/coin"
-                    android:layout_marginTop="10dp"/>
-
                 <TextView
                     android:id="@+id/getCoins"
                     android:layout_width="match_parent"
@@ -59,7 +45,7 @@
                     android:letterSpacing="0.3"
                     android:textStyle="bold"
                     android:textColor="@color/colorWhite"
-                    android:background="@color/colorDarkRed"
+                    android:background="@color/colorAmour"
                     />
 
         </LinearLayout>
