@@ -94,22 +94,26 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
                     MainActivity.editor.putString("operation","Addition");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
-                    ActivityCode(level_choice.class);
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
                 }else if(getMath.equals("Subraction")){
                     MainActivity.editor.putString("operation","Subraction");
-                    MainActivity.editor.apply();
+                    MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
-                    ActivityCode(level_choice.class);
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
                 }else if(getMath.equals("Multiplication")){
                     MainActivity.editor.putString("operation","Multiplication");
-                    MainActivity.editor.apply();
+                    MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
-                    ActivityCode(level_choice.class);
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
                 }else if(getMath.equals("Division")){
                     MainActivity.editor.putString("operation","Division");
-                    MainActivity.editor.apply();
+                    MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
-                    ActivityCode(level_choice.class);
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
                 }
 
                 break;
@@ -138,11 +142,6 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
     public void getchoiceX(String mathematics){
         choicex.setText("");
         choicex.setText(mathematics);
-    }
-
-    public void ActivityCode(Class cls){
-        Intent intent = new Intent(getApplicationContext(),cls);
-        startActivity(intent);
     }
 
     @Override
