@@ -95,8 +95,8 @@ public class level_choice extends AppCompatActivity {
                     unlockBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                           if (MainActivity.prefs.getInt("Coins",0) >= 1){
-                               int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 1;
+                           if (MainActivity.prefs.getInt("Coins",0) >= 25){
+                               int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 25;
                                MainActivity.editor.putInt("Coins",getCurrentCoins);
                                if (MainActivity.prefs.getString("operation",null) == "Addition"){
                                    MainActivity.editor.putInt("AUnlock02",1);
@@ -157,8 +157,8 @@ public class level_choice extends AppCompatActivity {
                     unlockBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (MainActivity.prefs.getInt("Coins",0) >= 1){
-                                int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 1;
+                            if (MainActivity.prefs.getInt("Coins",0) >= 50){
+                                int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 50;
                                 MainActivity.editor.putInt("Coins",getCurrentCoins);
                                 if (MainActivity.prefs.getString("operation",null) == "Addition"){
                                     MainActivity.editor.putInt("AUnlock03",1);

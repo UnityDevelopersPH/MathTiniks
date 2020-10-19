@@ -257,7 +257,7 @@ public class challenge_template extends AppCompatActivity {
            if (MainActivity.prefs.getString("operation",null) == "Division"){
                Log.d("yesSir",String.valueOf(lvlCountFinal));
                if (lvlCountFinal >= 1 && lvlCountFinal <= 10) {
-                   num1 = rand.nextInt(10)*3;
+                   num1 = rand.nextInt(11)*3;
                    num2 = 3;
                }
                if (lvlCountFinal >= 11 && lvlCountFinal <= 20) {
@@ -315,9 +315,9 @@ public class challenge_template extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode== KeyEvent.KEYCODE_BACK)
-            Toast.makeText(getApplicationContext(), "back press",
-                    Toast.LENGTH_LONG).show();
+        if(keyCode== KeyEvent.KEYCODE_BACK){
+            Toast.makeText(this, "Back Press", Toast.LENGTH_SHORT).show();
+        }
 
         return false;
         // Disable back button..............
@@ -342,13 +342,13 @@ public class challenge_template extends AppCompatActivity {
                    int Fnum2 = Integer.parseInt(question_Two.getText().toString());
                    int checkAns = 0;
                    int lvlCount = MainActivity.prefs.getInt("getLevelSelected",0);
-                   if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                   if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
                        checkAns = Fnum1 + Fnum2;
-                   } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                   } else if (MainActivity.prefs.getString("operation", null).equals("Subraction")) {
                        checkAns = Fnum1 - Fnum2;
-                   } else if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                   } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
                        checkAns = Fnum1 * Fnum2;
-                   } else if (MainActivity.prefs.getString("operation", null) == "Division") {
+                   } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
                        checkAns = Fnum1 / Fnum2;
                    }
 
@@ -365,22 +365,22 @@ public class challenge_template extends AppCompatActivity {
                            checkCount.setText(String.valueOf(checkCounts));
                            int getCoins = Integer.parseInt(coinCount.getText().toString());
                            getCoins++;
-                           if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                           if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
                                int getLevelUnlock = MainActivity.prefs.getInt("addLevel", 1);
                                getLevelUnlock++;
                                MainActivity.editor.putInt("addLevel", getLevelUnlock);
                                MainActivity.editor.apply();
-                           } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                           } else if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
                                int getLevelUnlock = MainActivity.prefs.getInt("subLevel", 1);
                                getLevelUnlock++;
                                MainActivity.editor.putInt("subLevel", getLevelUnlock);
                                MainActivity.editor.apply();
-                           } else if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                           } else if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
                                int getLevelUnlock = MainActivity.prefs.getInt("mulLevel", 1);
                                getLevelUnlock++;
                                MainActivity.editor.putInt("mulLevel", getLevelUnlock);
                                MainActivity.editor.apply();
-                           } else if (MainActivity.prefs.getString("operation", null) == "Division") {
+                           } else if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
                                int getLevelUnlock = MainActivity.prefs.getInt("diviLevel", 1);
                                getLevelUnlock++;
                                MainActivity.editor.putInt("diviLevel", getLevelUnlock);
@@ -441,7 +441,7 @@ public class challenge_template extends AppCompatActivity {
 
                        final AlertDialog wdialog = new AlertDialog.Builder(challenge_template.this).create();
                        LayoutInflater inflater = getLayoutInflater();
-                       View wView = (View) inflater.inflate(R.layout.wrong, null);
+                       View wView = inflater.inflate(R.layout.wrong, null);
                        wdialog.setView(wView);
                        wdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
                        wdialog.setCanceledOnTouchOutside(true);
@@ -466,7 +466,7 @@ public class challenge_template extends AppCompatActivity {
                            life_two.setVisibility(View.GONE);
                            final AlertDialog gdialog = new AlertDialog.Builder(challenge_template.this).create();
                            LayoutInflater ginflater = getLayoutInflater();
-                           View gView = (View) ginflater.inflate(R.layout.gameover, null);
+                           View gView = ginflater.inflate(R.layout.gameover, null);
                            TextView getCoins = gView.findViewById(R.id.getCoins);
                            Button close_gameover = gView.findViewById(R.id.close_gameover);
                            getCoins.setText(checkCount.getText().toString());

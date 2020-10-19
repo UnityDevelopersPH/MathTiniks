@@ -285,17 +285,17 @@ public class chall31_template extends AppCompatActivity {
         int lvlCountFinal = MainActivity.prefs.getInt("getLevelSelected", 0);
         if (MainActivity.prefs.getString("operation", null) == "Division") {
             Log.d("yesSir", String.valueOf(lvlCountFinal));
-            if (lvlCountFinal >= 1 && lvlCountFinal <= 10) {
-                num1 = rand.nextInt(10) * 8;
+            if (lvlCountFinal >= 31 && lvlCountFinal <= 40) {
+                num1 = rand.nextInt(10) * 4;
                 num2 = 4;
             }
-            if (lvlCountFinal >= 11 && lvlCountFinal <= 20) {
-                num1 = rand.nextInt(10) * 8;
-                num2 = 8;
+            if (lvlCountFinal >= 41 && lvlCountFinal <= 50) {
+                num1 = rand.nextInt(10) * 7;
+                num2 = 7;
             }
-            if (lvlCountFinal >= 21 && lvlCountFinal <= 30) {
-                num1 = rand.nextInt(10) * 12;
-                num2 = 12;
+            if (lvlCountFinal >= 51 && lvlCountFinal <= 60) {
+                num1 = rand.nextInt(10) * 10;
+                num2 = 10;
             }
         } else {
             num1 = rand.nextInt(30) + 1;
