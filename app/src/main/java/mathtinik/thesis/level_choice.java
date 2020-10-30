@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.mozilla.javascript.tools.jsc.Main;
+
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -35,37 +37,71 @@ public class level_choice extends AppCompatActivity {
         setContentView(R.layout.activity_level_choice);
         UI();
 
-
-        if (MainActivity.prefs.getString("operation",null) == "Addition"){
-            if (MainActivity.prefs.getInt("AUnlock02",0) == 1){
-                level2.setImageResource(R.drawable.level_two);
+        if (MainActivity.prefs.getString("MLevelSelected",null).equals("Easy")) {
+            if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                if (MainActivity.prefs.getInt("AUnlock02", 0) == 1) {
+                    level2.setImageResource(R.drawable.level_two);
+                }
+                if (MainActivity.prefs.getInt("AUnlock03", 0) == 1) {
+                    level3.setImageResource(R.drawable.level_three);
+                }
             }
-            if (MainActivity.prefs.getInt("AUnlock03",0) == 1){
-                level3.setImageResource(R.drawable.level_three);
+            if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                if (MainActivity.prefs.getInt("SUnlock02", 0) == 1) {
+                    level2.setImageResource(R.drawable.level_two);
+                }
+                if (MainActivity.prefs.getInt("SUnlock03", 0) == 1) {
+                    level3.setImageResource(R.drawable.level_three);
+                }
             }
-        }
-        if (MainActivity.prefs.getString("operation",null) == "Subraction"){
-            if (MainActivity.prefs.getInt("SUnlock02",0) == 1){
-                level2.setImageResource(R.drawable.level_two);
+            if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                if (MainActivity.prefs.getInt("MUnlock02", 0) == 1) {
+                    level2.setImageResource(R.drawable.level_two);
+                }
+                if (MainActivity.prefs.getInt("MUnlock03", 0) == 1) {
+                    level3.setImageResource(R.drawable.level_three);
+                }
             }
-            if (MainActivity.prefs.getInt("SUnlock03",0) == 1){
-                level3.setImageResource(R.drawable.level_three);
+            if (MainActivity.prefs.getString("operation", null) == "Division") {
+                if (MainActivity.prefs.getInt("DUnlock02", 0) == 1) {
+                    level2.setImageResource(R.drawable.level_two);
+                }
+                if (MainActivity.prefs.getInt("DUnlock03", 0) == 1) {
+                    level3.setImageResource(R.drawable.level_three);
+                }
             }
-        }
-        if (MainActivity.prefs.getString("operation",null) == "Multiplication"){
-            if (MainActivity.prefs.getInt("MUnlock02",0) == 1){
-                level2.setImageResource(R.drawable.level_two);
+        }else if (MainActivity.prefs.getString("MLevelSelected",null).equals("Medium")) {
+            if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                if (MainActivity.prefs.getInt("MAUnlock02", 0) == 1) {
+                    level2.setImageResource(R.drawable.level_two);
+                }
+                if (MainActivity.prefs.getInt("MAUnlock03", 0) == 1) {
+                    level3.setImageResource(R.drawable.level_three);
+                }
             }
-            if (MainActivity.prefs.getInt("MUnlock03",0) == 1){
-                level3.setImageResource(R.drawable.level_three);
+            if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                if (MainActivity.prefs.getInt("MSUnlock02", 0) == 1) {
+                    level2.setImageResource(R.drawable.level_two);
+                }
+                if (MainActivity.prefs.getInt("MSUnlock03", 0) == 1) {
+                    level3.setImageResource(R.drawable.level_three);
+                }
             }
-        }
-        if (MainActivity.prefs.getString("operation",null) == "Division"){
-            if (MainActivity.prefs.getInt("DUnlock02",0) == 1){
-                level2.setImageResource(R.drawable.level_two);
+            if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                if (MainActivity.prefs.getInt("MMUnlock02", 0) == 1) {
+                    level2.setImageResource(R.drawable.level_two);
+                }
+                if (MainActivity.prefs.getInt("MMUnlock03", 0) == 1) {
+                    level3.setImageResource(R.drawable.level_three);
+                }
             }
-            if (MainActivity.prefs.getInt("DUnlock03",0) == 1){
-                level3.setImageResource(R.drawable.level_three);
+            if (MainActivity.prefs.getString("operation", null) == "Division") {
+                if (MainActivity.prefs.getInt("MDUnlock02", 0) == 1) {
+                    level2.setImageResource(R.drawable.level_two);
+                }
+                if (MainActivity.prefs.getInt("MDUnlock03", 0) == 1) {
+                    level3.setImageResource(R.drawable.level_three);
+                }
             }
         }
 
@@ -98,21 +134,40 @@ public class level_choice extends AppCompatActivity {
                            if (MainActivity.prefs.getInt("Coins",0) >= 25){
                                int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 25;
                                MainActivity.editor.putInt("Coins",getCurrentCoins);
-                               if (MainActivity.prefs.getString("operation",null) == "Addition"){
-                                   MainActivity.editor.putInt("AUnlock02",1);
-                                   MainActivity.editor.apply();
-                               }
-                               if (MainActivity.prefs.getString("operation",null) == "Subraction"){
-                                   MainActivity.editor.putInt("SUnlock02",1);
-                                   MainActivity.editor.apply();
-                               }
-                               if (MainActivity.prefs.getString("operation", null) == "Multiplication"){
-                                   MainActivity.editor.putInt("MUnlock02",1);
-                                   MainActivity.editor.apply();
-                               }
-                               if (MainActivity.prefs.getString("operation", null) == "Division"){
-                                   MainActivity.editor.putInt("DUnlock02",1);
-                                   MainActivity.editor.apply();
+                               if (MainActivity.prefs.getString("MLevelSelected",null).equals("Easy")) {
+                                   if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                                       MainActivity.editor.putInt("AUnlock02", 1);
+                                       MainActivity.editor.apply();
+                                   }
+                                   if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                                       MainActivity.editor.putInt("SUnlock02", 1);
+                                       MainActivity.editor.apply();
+                                   }
+                                   if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                                       MainActivity.editor.putInt("MUnlock02", 1);
+                                       MainActivity.editor.apply();
+                                   }
+                                   if (MainActivity.prefs.getString("operation", null) == "Division") {
+                                       MainActivity.editor.putInt("DUnlock02", 1);
+                                       MainActivity.editor.apply();
+                                   }
+                               }else if (MainActivity.prefs.getString("MLevelSelected",null).equals("Medium")) {
+                                   if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                                       MainActivity.editor.putInt("MAUnlock02", 1);
+                                       MainActivity.editor.apply();
+                                   }
+                                   if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                                       MainActivity.editor.putInt("MSUnlock02", 1);
+                                       MainActivity.editor.apply();
+                                   }
+                                   if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                                       MainActivity.editor.putInt("MMUnlock02", 1);
+                                       MainActivity.editor.apply();
+                                   }
+                                   if (MainActivity.prefs.getString("operation", null) == "Division") {
+                                       MainActivity.editor.putInt("MDUnlock02", 1);
+                                       MainActivity.editor.apply();
+                                   }
                                }
                                MainActivity.editor.apply();
                                cdialog.dismiss();
@@ -160,21 +215,40 @@ public class level_choice extends AppCompatActivity {
                             if (MainActivity.prefs.getInt("Coins",0) >= 50){
                                 int getCurrentCoins = MainActivity.prefs.getInt("Coins",0) - 50;
                                 MainActivity.editor.putInt("Coins",getCurrentCoins);
-                                if (MainActivity.prefs.getString("operation",null) == "Addition"){
-                                    MainActivity.editor.putInt("AUnlock03",1);
-                                    MainActivity.editor.apply();
-                                }
-                                if (MainActivity.prefs.getString("operation",null) == "Subraction"){
-                                    MainActivity.editor.putInt("SUnlock03",1);
-                                    MainActivity.editor.apply();
-                                }
-                                if (MainActivity.prefs.getString("operation", null) == "Multiplication"){
-                                    MainActivity.editor.putInt("MUnlock03",1);
-                                    MainActivity.editor.apply();
-                                }
-                                if (MainActivity.prefs.getString("operation", null) == "Division"){
-                                    MainActivity.editor.putInt("DUnlock03",1);
-                                    MainActivity.editor.apply();
+                                if (MainActivity.prefs.getString("MLevelSelected",null).equals("Easy")) {
+                                    if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                                        MainActivity.editor.putInt("AUnlock03", 1);
+                                        MainActivity.editor.apply();
+                                    }
+                                    if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                                        MainActivity.editor.putInt("SUnlock03", 1);
+                                        MainActivity.editor.apply();
+                                    }
+                                    if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                                        MainActivity.editor.putInt("MUnlock03", 1);
+                                        MainActivity.editor.apply();
+                                    }
+                                    if (MainActivity.prefs.getString("operation", null) == "Division") {
+                                        MainActivity.editor.putInt("DUnlock03", 1);
+                                        MainActivity.editor.apply();
+                                    }
+                                }else if (MainActivity.prefs.getString("MLevelSelected",null).equals("Medium")) {
+                                    if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                                        MainActivity.editor.putInt("MAUnlock03", 1);
+                                        MainActivity.editor.apply();
+                                    }
+                                    if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                                        MainActivity.editor.putInt("MSUnlock03", 1);
+                                        MainActivity.editor.apply();
+                                    }
+                                    if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                                        MainActivity.editor.putInt("MMUnlock03", 1);
+                                        MainActivity.editor.apply();
+                                    }
+                                    if (MainActivity.prefs.getString("operation", null) == "Division") {
+                                        MainActivity.editor.putInt("MDUnlock03", 1);
+                                        MainActivity.editor.apply();
+                                    }
                                 }
                                 MainActivity.editor.apply();
                                 cdialog.dismiss();

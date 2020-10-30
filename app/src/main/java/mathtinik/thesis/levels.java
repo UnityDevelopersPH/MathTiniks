@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +15,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,12 +28,13 @@ public class levels extends AppCompatActivity {
     levelAdapter levelAdapter;
     ImageView backtoChoose;
     TextView coinCount,selectOperation;
+    ImageView coins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
-
+        coins =findViewById(R.id.coins);
         recyclerView = findViewById(R.id.recyclerView);
         coinCount = findViewById(R.id.coinCount);
         selectOperation = findViewById(R.id.selectOperation);
@@ -41,7 +48,7 @@ public class levels extends AppCompatActivity {
         selectOperation.setText(MainActivity.prefs.getString("operation",null));
 
         coinCount.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
-
+        FlipAnimator(getApplicationContext(),coins);
         backtoChoose = findViewById(R.id.backtoChooseLevel);
 
         backtoChoose.setOnClickListener(new View.OnClickListener(){
@@ -55,6 +62,12 @@ public class levels extends AppCompatActivity {
 
     }
 
+    public static void FlipAnimator(Context c,ImageView coins){
+        AnimatorSet flip_anim;
+        flip_anim = (AnimatorSet) AnimatorInflater.loadAnimator(c,R.animator.flip_anim);
+        flip_anim.setTarget(coins);
+        flip_anim.start();
+    }
 
 
     @Override

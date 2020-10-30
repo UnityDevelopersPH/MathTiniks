@@ -20,7 +20,7 @@ public class level61 extends AppCompatActivity {
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     level61Adapter levelAdapter;
-    ImageView backtoChoose;
+    ImageView backtoChoose,coins;
     TextView coinCount,selectOperation;
 
 
@@ -28,6 +28,9 @@ public class level61 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level61);
+
+        coins = findViewById(R.id.coins);
+        levels.FlipAnimator(getApplicationContext(),coins);
 
 
 
@@ -41,6 +44,8 @@ public class level61 extends AppCompatActivity {
         levelAdapter=new level61Adapter(MainActivity.s_90, level61.this);
         recyclerView.setAdapter(levelAdapter);
         levelAdapter.notifyDataSetChanged();
+
+
 
         recyclerView.setHasFixedSize(true);
         selectOperation.setText(MainActivity.prefs.getString("operation",null));

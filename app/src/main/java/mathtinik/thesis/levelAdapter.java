@@ -42,26 +42,62 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
         holder.num_level.setText(arr.get(position));
         String getNumLevel = holder.num_level.getText().toString();
         for (int i = 0; i<Integer.parseInt(getNumLevel);i++){
-            if (MainActivity.prefs.getString("operation",null) == "Addition"){
-                if (i == MainActivity.prefs.getInt("addLevel",1)){
-                   holder.num_level.setText("");
+            if (MainActivity.prefs.getString("MLevelSelected",null).equals("Easy")) {
+                if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                    if (i == MainActivity.prefs.getInt("addLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
+                } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                    if (i == MainActivity.prefs.getInt("subLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
+                } else if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                    if (i == MainActivity.prefs.getInt("mulLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
+                } else if (MainActivity.prefs.getString("operation", null) == "Division") {
+                    if (i == MainActivity.prefs.getInt("diviLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
                 }
-            }else
-            if (MainActivity.prefs.getString("operation",null) == "Subraction"){
-                if (i == MainActivity.prefs.getInt("subLevel",1)){
-                    holder.num_level.setText("");
+            }else if(MainActivity.prefs.getString("MLevelSelected",null).equals("Medium")){
+                if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                    if (i == MainActivity.prefs.getInt("MaddLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
+                } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                    if (i == MainActivity.prefs.getInt("MsubLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
+                } else if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                    if (i == MainActivity.prefs.getInt("MmulLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
+                } else if (MainActivity.prefs.getString("operation", null) == "Division") {
+                    if (i == MainActivity.prefs.getInt("MdiviLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
                 }
-            }else
-            if (MainActivity.prefs.getString("operation",null) == "Multiplication"){
-                if (i == MainActivity.prefs.getInt("mulLevel",1)){
-                    holder.num_level.setText("");
-                }
-            }else
-            if (MainActivity.prefs.getString("operation",null) == "Division"){
-                if (i == MainActivity.prefs.getInt("diviLevel",1)){
-                    holder.num_level.setText("");
+            }else if(MainActivity.prefs.getString("MLevelSelected",null).equals("Hard")){
+                if (MainActivity.prefs.getString("operation", null) == "Addition") {
+                    if (i == MainActivity.prefs.getInt("HaddLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
+                } else if (MainActivity.prefs.getString("operation", null) == "Subraction") {
+                    if (i == MainActivity.prefs.getInt("HsubLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
+                } else if (MainActivity.prefs.getString("operation", null) == "Multiplication") {
+                    if (i == MainActivity.prefs.getInt("HmulLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
+                } else if (MainActivity.prefs.getString("operation", null) == "Division") {
+                    if (i == MainActivity.prefs.getInt("HdiviLevel", 1)) {
+                        holder.num_level.setText("");
+                    }
                 }
             }
+
         }
 
     }
@@ -93,8 +129,16 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
         public void onClick(View v) {
 
             if (!num_level.getText().toString().equals("")){
-                Intent intent = new Intent(context,challenge_template.class);
-                context.startActivity(intent);
+                if (MainActivity.prefs.getString("MLevelSelected",null).equals("Easy")) {
+                    Intent intent = new Intent(context, challenge_template.class);
+                    context.startActivity(intent);
+                }else if(MainActivity.prefs.getString("MLevelSelected",null).equals("Medium")) {
+                    Intent intent = new Intent(context, matching.class);
+                    context.startActivity(intent);
+                }else if(MainActivity.prefs.getString("MLevelSelected",null).equals("Hard")) {
+                    Intent intent = new Intent(context, hard_matching.class);
+                    context.startActivity(intent);
+                }
                 MainActivity.editor.putInt("getLevelSelected",Integer.parseInt(num_level.getText().toString()));
                 MainActivity.editor.commit();
             }else{

@@ -10,12 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <service android:name=".MusicService"
+            android:enabled="true"/>
+
         <activity android:name=".unlock" />
         <activity android:name=".question_template" />
         <activity android:name=".challenge_template" />
         <activity android:name=".level_choice" />
         <activity android:name=".levels" />
-        <activity android:name=".matching" />
+        <activity android:name=".matching"/>
+        <activity android:name=".hard_matching"/>
         <activity android:name=".exitdialog" />
         <activity android:name=".gamechoices" />
         <activity android:name=".settings" />

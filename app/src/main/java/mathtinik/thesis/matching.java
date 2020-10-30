@@ -11,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -32,11 +33,12 @@ public class matching extends AppCompatActivity {
                 a1,a2,a3,a4,a5,a6,a7,a8,a9;
     TextView coins,life;
 
-    ImageView heart;
-    Animation Pulse;
+    ImageView heart,backBtn,ImgCoins;
+    Animation Pulse,animSpinOut,animZF_In_Out;
+    LinearLayout formMatching;
 
     String getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9;
-    int getQ1,getQ2,getQ3,getQ4,getQ5,getQ6,getQ7,getQ8,getQ9;
+    float getQ1,getQ2,getQ3,getQ4,getQ5,getQ6,getQ7,getQ8,getQ9;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +46,36 @@ public class matching extends AppCompatActivity {
         ImplementUI();
         QandAGenerate();
         coins.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
+        OnClickBTN();
+    }
+
+    //FunctionOnclick
+    public void OnClickBTN(){
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity.prefs.getString("selectlevel", null).equals("level1")) {
+                    Intent intent = new Intent(getApplicationContext(),levels.class);
+                    startActivity(intent);
+                    finish();
+
+                }else if (MainActivity.prefs.getString("selectlevel", null).equals("level31")) {
+                    Intent intent = new Intent(getApplicationContext(),level31.class);
+                    startActivity(intent);
+                    finish();
+
+                }else if (MainActivity.prefs.getString("selectlevel", null).equals("level61")) {
+                    Intent intent = new Intent(getApplicationContext(),level61.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+
+            }
+        });
 
     }
+
 
     //Function -> QuestionToAnswer
     public void QuestionToAnswer(View v){
@@ -56,63 +86,63 @@ public class matching extends AppCompatActivity {
                 if (checked){
                     q1.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(q2,q3,q4,q5,q6,q7,q8,q9);
-                    FunctionButton(q1,String.valueOf(getQ1), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
+                    FunctionButton(q1,String.valueOf(formatNum(getQ1)), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
                 }
                 break;
             case R.id.q2:
                 if (checked){
                     q2.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(q1,q3,q4,q5,q6,q7,q8,q9);
-                    FunctionButton(q2,String.valueOf(getQ2), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
+                    FunctionButton(q2,String.valueOf(formatNum(getQ2)), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
                 }
                 break;
             case R.id.q3:
                 if (checked){
                     q3.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(q1,q2,q4,q5,q6,q7,q8,q9);
-                    FunctionButton(q3,String.valueOf(getQ3), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
+                    FunctionButton(q3,String.valueOf(formatNum(getQ3)), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
                 }
                 break;
             case R.id.q4:
                 if (checked){
                     q4.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(q1,q2,q3,q5,q6,q7,q8,q9);
-                    FunctionButton(q4,String.valueOf(getQ4), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
+                    FunctionButton(q4,String.valueOf(formatNum(getQ4)), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
                 }
                 break;
             case R.id.q5:
                 if (checked){
                     q5.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(q1,q2,q3,q4,q6,q7,q8,q9);
-                    FunctionButton(q5,String.valueOf(getQ5), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
+                    FunctionButton(q5,String.valueOf(formatNum(getQ5)), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
                 }
                 break;
             case R.id.q6:
                 if (checked){
                     q6.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(q1,q2,q3,q4,q5,q7,q8,q9);
-                    FunctionButton(q6,String.valueOf(getQ6), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
+                    FunctionButton(q6,String.valueOf(formatNum(getQ6)), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
                 }
                 break;
             case R.id.q7:
                 if (checked){
                     q7.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(q1,q2,q3,q4,q5,q6,q8,q9);
-                    FunctionButton(q7,String.valueOf(getQ7), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
+                    FunctionButton(q7,String.valueOf(formatNum(getQ7)), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
                 }
                 break;
             case R.id.q8:
                 if (checked){
                     q8.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(q1,q2,q3,q4,q5,q6,q7,q9);
-                    FunctionButton(q8,String.valueOf(getQ8), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
+                    FunctionButton(q8,String.valueOf(formatNum(getQ8)), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
                 }
                 break;
             case R.id.q9:
                 if (checked){
                     q9.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(q1,q2,q3,q4,q5,q6,q7,q8);
-                    FunctionButton(q9,String.valueOf(getQ9), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
+                    FunctionButton(q9,String.valueOf(formatNum(getQ9)), a1, a2, a3, a4, a5, a6, a7, a8, a9,getA1,getA2,getA3,getA4,getA5,getA6,getA7,getA8,getA9);
                 }
                 break;
         }
@@ -128,85 +158,114 @@ public class matching extends AppCompatActivity {
                 if (checked){
                     a1.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(a2,a3,a4,a5,a6,a7,a8,a9);
-                    FunctionButton(a1,getA1,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(getQ1),String.valueOf(getQ2),String.valueOf(getQ3),String.valueOf(getQ4),String.valueOf(getQ5),String.valueOf(getQ6),String.valueOf(getQ7),String.valueOf(getQ8),String.valueOf(getQ9));
+                    FunctionButton(a1,getA1,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(formatNum(getQ1)),String.valueOf(formatNum(getQ2)),String.valueOf(formatNum(getQ3)),String.valueOf(formatNum(getQ4)),String.valueOf(formatNum(getQ5)),String.valueOf(formatNum(getQ6)),String.valueOf(formatNum(getQ7)),String.valueOf(formatNum(getQ8)),String.valueOf(formatNum(getQ9)));
                 }
                 break;
             case R.id.a2:
                 if (checked){
                     a2.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(a1,a3,a4,a5,a6,a7,a8,a9);
-                    FunctionButton(a2,getA2,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(getQ1),String.valueOf(getQ2),String.valueOf(getQ3),String.valueOf(getQ4),String.valueOf(getQ5),String.valueOf(getQ6),String.valueOf(getQ7),String.valueOf(getQ8),String.valueOf(getQ9));
+                    FunctionButton(a2,getA2,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(formatNum(getQ1)),String.valueOf(formatNum(getQ2)),String.valueOf(formatNum(getQ3)),String.valueOf(formatNum(getQ4)),String.valueOf(formatNum(getQ5)),String.valueOf(formatNum(getQ6)),String.valueOf(formatNum(getQ7)),String.valueOf(formatNum(getQ8)),String.valueOf(formatNum(getQ9)));
                 }
                 break;
             case R.id.a3:
                 if (checked){
                     a3.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(a1,a2,a4,a5,a6,a7,a8,a9);
-                    FunctionButton(a3,getA3,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(getQ1),String.valueOf(getQ2),String.valueOf(getQ3),String.valueOf(getQ4),String.valueOf(getQ5),String.valueOf(getQ6),String.valueOf(getQ7),String.valueOf(getQ8),String.valueOf(getQ9));
+                    FunctionButton(a3,getA3,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(formatNum(getQ1)),String.valueOf(formatNum(getQ2)),String.valueOf(formatNum(getQ3)),String.valueOf(formatNum(getQ4)),String.valueOf(formatNum(getQ5)),String.valueOf(formatNum(getQ6)),String.valueOf(formatNum(getQ7)),String.valueOf(formatNum(getQ8)),String.valueOf(formatNum(getQ9)));
                 }
                 break;
             case R.id.a4:
                 if (checked){
                     a4.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(a1,a2,a3,a5,a6,a7,a8,a9);
-                    FunctionButton(a4,getA4,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(getQ1),String.valueOf(getQ2),String.valueOf(getQ3),String.valueOf(getQ4),String.valueOf(getQ5),String.valueOf(getQ6),String.valueOf(getQ7),String.valueOf(getQ8),String.valueOf(getQ9));
+                    FunctionButton(a4,getA4,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(formatNum(getQ1)),String.valueOf(formatNum(getQ2)),String.valueOf(formatNum(getQ3)),String.valueOf(formatNum(getQ4)),String.valueOf(formatNum(getQ5)),String.valueOf(formatNum(getQ6)),String.valueOf(formatNum(getQ7)),String.valueOf(formatNum(getQ8)),String.valueOf(formatNum(getQ9)));
                 }
                 break;
             case R.id.a5:
                 if (checked){
                     a5.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(a1,a2,a3,a4,a6,a7,a8,a9);
-                    FunctionButton(a5,getA5,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(getQ1),String.valueOf(getQ2),String.valueOf(getQ3),String.valueOf(getQ4),String.valueOf(getQ5),String.valueOf(getQ6),String.valueOf(getQ7),String.valueOf(getQ8),String.valueOf(getQ9));
+                    FunctionButton(a5,getA5,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(formatNum(getQ1)),String.valueOf(formatNum(getQ2)),String.valueOf(formatNum(getQ3)),String.valueOf(formatNum(getQ4)),String.valueOf(formatNum(getQ5)),String.valueOf(formatNum(getQ6)),String.valueOf(formatNum(getQ7)),String.valueOf(formatNum(getQ8)),String.valueOf(formatNum(getQ9)));
                 }
                 break;
             case R.id.a6:
                 if (checked){
                     a6.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(a1,a2,a3,a4,a5,a7,a8,a9);
-                    FunctionButton(a6,getA6,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(getQ1),String.valueOf(getQ2),String.valueOf(getQ3),String.valueOf(getQ4),String.valueOf(getQ5),String.valueOf(getQ6),String.valueOf(getQ7),String.valueOf(getQ8),String.valueOf(getQ9));
+                    FunctionButton(a6,getA6,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(formatNum(getQ1)),String.valueOf(formatNum(getQ2)),String.valueOf(formatNum(getQ3)),String.valueOf(formatNum(getQ4)),String.valueOf(formatNum(getQ5)),String.valueOf(formatNum(getQ6)),String.valueOf(formatNum(getQ7)),String.valueOf(formatNum(getQ8)),String.valueOf(formatNum(getQ9)));
                 }
                 break;
             case R.id.a7:
                 if (checked){
                     a7.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(a1,a2,a3,a4,a5,a6,a8,a9);
-                    FunctionButton(a7,getA7,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(getQ1),String.valueOf(getQ2),String.valueOf(getQ3),String.valueOf(getQ4),String.valueOf(getQ5),String.valueOf(getQ6),String.valueOf(getQ7),String.valueOf(getQ8),String.valueOf(getQ9));
+                    FunctionButton(a7,getA7,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(formatNum(getQ1)),String.valueOf(formatNum(getQ2)),String.valueOf(formatNum(getQ3)),String.valueOf(formatNum(getQ4)),String.valueOf(formatNum(getQ5)),String.valueOf(formatNum(getQ6)),String.valueOf(formatNum(getQ7)),String.valueOf(formatNum(getQ8)),String.valueOf(formatNum(getQ9)));
                 }
                 break;
             case R.id.a8:
                 if (checked){
                     a8.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(a1,a2,a3,a4,a5,a6,a7,a9);
-                    FunctionButton(a8,getA8,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(getQ1),String.valueOf(getQ2),String.valueOf(getQ3),String.valueOf(getQ4),String.valueOf(getQ5),String.valueOf(getQ6),String.valueOf(getQ7),String.valueOf(getQ8),String.valueOf(getQ9));
+                    FunctionButton(a8,getA8,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(formatNum(getQ1)),String.valueOf(formatNum(getQ2)),String.valueOf(formatNum(getQ3)),String.valueOf(formatNum(getQ4)),String.valueOf(formatNum(getQ5)),String.valueOf(formatNum(getQ6)),String.valueOf(formatNum(getQ7)),String.valueOf(formatNum(getQ8)),String.valueOf(formatNum(getQ9)));
                 }
                 break;
             case R.id.a9:
                 if (checked){
                     a9.setBackgroundResource(R.drawable.select_rb);
                     checkRadioBTN(a1,a2,a3,a4,a5,a6,a7,a8);
-                    FunctionButton(a9,getA9,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(getQ1),String.valueOf(getQ2),String.valueOf(getQ3),String.valueOf(getQ4),String.valueOf(getQ5),String.valueOf(getQ6),String.valueOf(getQ7),String.valueOf(getQ8),String.valueOf(getQ9));
+                    FunctionButton(a9,getA9,q1, q2, q3, q4, q5, q6, q7, q8, q9,String.valueOf(formatNum(getQ1)),String.valueOf(formatNum(getQ2)),String.valueOf(formatNum(getQ3)),String.valueOf(formatNum(getQ4)),String.valueOf(formatNum(getQ5)),String.valueOf(formatNum(getQ6)),String.valueOf(formatNum(getQ7)),String.valueOf(formatNum(getQ8)),String.valueOf(formatNum(getQ9)));
                 }
                 break;
         }
 
     }
 
-
     public void ConvertQuestionMath(){
-        try {
             ScriptEngine e = new ScriptEngineManager().getEngineByName("js");
-            getQ1 = ((Number)e.eval(q1.getText().toString())).intValue();
-            getQ2 = ((Number)e.eval(q2.getText().toString())).intValue();
-            getQ3 = ((Number)e.eval(q3.getText().toString())).intValue();
-            getQ4 = ((Number)e.eval(q4.getText().toString())).intValue();
-            getQ5 = ((Number)e.eval(q5.getText().toString())).intValue();
-            getQ6 = ((Number)e.eval(q6.getText().toString())).intValue();
-            getQ7 = ((Number)e.eval(q7.getText().toString())).intValue();
-            getQ8 = ((Number)e.eval(q8.getText().toString())).intValue();
-            getQ9 = ((Number)e.eval(q9.getText().toString())).intValue();
-        } catch (ScriptException scriptException) {
-            scriptException.printStackTrace();
-        }
+            if (MainActivity.prefs.getString("operation",null).equals("Multiplication")) {
+                try {
+                    getQ1 = ((Number) e.eval(q1.getText().toString().replace("x", "*"))).floatValue();
+                    getQ2 = ((Number) e.eval(q2.getText().toString().replace("x","*"))).floatValue();
+                    getQ3 = ((Number) e.eval(q3.getText().toString().replace("x","*"))).floatValue();
+                    getQ4 = ((Number) e.eval(q4.getText().toString().replace("x","*"))).floatValue();
+                    getQ5 = ((Number) e.eval(q5.getText().toString().replace("x","*"))).floatValue();
+                    getQ6 = ((Number) e.eval(q6.getText().toString().replace("x","*"))).floatValue();
+                    getQ7 = ((Number) e.eval(q7.getText().toString().replace("x","*"))).floatValue();
+                    getQ8 = ((Number) e.eval(q8.getText().toString().replace("x","*"))).floatValue();
+                    getQ9 = ((Number) e.eval(q9.getText().toString().replace("x","*"))).floatValue();
+                } catch (ScriptException scriptException) {
+                    scriptException.printStackTrace();
+                }
+            }else if (MainActivity.prefs.getString("operation",null).equals("Division")) {
+                try {
+                    getQ1 = ((Number) e.eval(q1.getText().toString().replace("÷", "/"))).floatValue();
+                    getQ2 = ((Number) e.eval(q2.getText().toString().replace("÷","/"))).floatValue();
+                    getQ3 = ((Number) e.eval(q3.getText().toString().replace("÷","/"))).floatValue();
+                    getQ4 = ((Number) e.eval(q4.getText().toString().replace("÷","/"))).floatValue();
+                    getQ5 = ((Number) e.eval(q5.getText().toString().replace("÷","/"))).floatValue();
+                    getQ6 = ((Number) e.eval(q6.getText().toString().replace("÷","/"))).floatValue();
+                    getQ7 = ((Number) e.eval(q7.getText().toString().replace("÷","/"))).floatValue();
+                    getQ8 = ((Number) e.eval(q8.getText().toString().replace("÷","/"))).floatValue();
+                    getQ9 = ((Number) e.eval(q9.getText().toString().replace("÷","/"))).floatValue();
+                } catch (ScriptException scriptException) {
+                    scriptException.printStackTrace();
+                }
+            }else{
+                try {
+                    getQ1 = ((Number) e.eval(q1.getText().toString())).floatValue();
+                    getQ2 = ((Number) e.eval(q2.getText().toString())).floatValue();
+                    getQ3 = ((Number) e.eval(q3.getText().toString())).floatValue();
+                    getQ4 = ((Number) e.eval(q4.getText().toString())).floatValue();
+                    getQ5 = ((Number) e.eval(q5.getText().toString())).floatValue();
+                    getQ6 = ((Number) e.eval(q6.getText().toString())).floatValue();
+                    getQ7 = ((Number) e.eval(q7.getText().toString())).floatValue();
+                    getQ8 = ((Number) e.eval(q8.getText().toString())).floatValue();
+                    getQ9 = ((Number) e.eval(q9.getText().toString())).floatValue();
+                } catch (ScriptException scriptException) {
+                    scriptException.printStackTrace();
+                }
+            }
 
         getA1 = a1.getText().toString();
         getA2 = a2.getText().toString();
@@ -242,22 +301,73 @@ public class matching extends AppCompatActivity {
 
 
     public void QandAGenerate(){
-        Random rand = new Random();
-        int ans;
-        for (int num =0; num < 9; num++){
-                int num1=rand.nextInt(13)+1;
-                int num2=rand.nextInt(13)+1;
-                String mergeNum = num1+"+"+num2;
-                ans = num1+num2;
+            formMatching.startAnimation(animZF_In_Out);
+            MainActivity.editor.remove("Solver").commit();
+            Random rand = new Random();
+            float ans = 0;
+            int num1 = 0;
+            int num2 = 0;
+            String mergeNum = null;
+            for (int num = 0; num < 9; num++) {
+
+                if (MainActivity.prefs.getString("selectlevel", null).equals("level1")) {
+
+                    num1 = rand.nextInt(13) + 1;
+                    num2 = rand.nextInt(13) + 1;
+
+                }
+                if (MainActivity.prefs.getString("selectlevel", null).equals("level31")) {
+                    num1 = rand.nextInt(20) * 2;
+                    num2 = rand.nextInt(20) * 2;
+
+                }
+                if (MainActivity.prefs.getString("selectlevel", null).equals("level61")) {
+                    num1 = rand.nextInt(25) * 4;
+                    num2 = rand.nextInt(25) * 4;
+                }
+                if (num1 >= num2) {
+                    if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
+                        mergeNum = num1 + "+" + num2;
+                        ans = num1 + num2;
+                    } else if (MainActivity.prefs.getString("operation", null).equals("Subraction")) {
+                        mergeNum = num1 + "-" + num2;
+                        ans = num1 - num2;
+                    } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
+                        mergeNum = num1 + "x" + num2;
+                        ans = num1 * num2;
+                    } else if (MainActivity.prefs.getString("operation", null).equals("Division")) {
+                        mergeNum = num1 + "÷" + num2;
+                        ans = ((float) num1) / num2;
+                    }
+                } else {
+                    if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
+                        mergeNum = num2 + "+" + num1;
+                        ans = num2 + num1;
+                    } else if (MainActivity.prefs.getString("operation", null).equals("Subraction")) {
+                        mergeNum = num2 + "-" + num1;
+                        ans = num2 - num1;
+                    } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
+                        mergeNum = num2 + "x" + num1;
+                        ans = num2 * num1;
+                    } else if (MainActivity.prefs.getString("operation", null).equals("Division")) {
+                        mergeNum = num2 + "÷" + num1;
+                        ans = ((float) num2) / num1;
+                    }
+                }
                 Question.add(mergeNum);
-                Answers.add(String.valueOf(ans));
-        }
-        Collections.shuffle(Answers);
-        Collections.shuffle(Question);
+                Answers.add(String.valueOf(NumberFormat.getInstance().format(ans)));
+            }
+            Collections.shuffle(Answers);
+            Collections.shuffle(Question);
 
-        setNumberRB(a1,Answers.get(0),a2,Answers.get(1),a3,Answers.get(2),a4,Answers.get(3),a5,Answers.get(4),a6,Answers.get(5),a7,Answers.get(6),a8,Answers.get(7),a9,Answers.get(8));
-        setNumberRB(q1,Question.get(0),q2,Question.get(1),q3,Question.get(2),q4,Question.get(3),q5,Question.get(4),q6,Question.get(5),q7,Question.get(6),q8,Question.get(7),q9,Question.get(8));
+            setNumberRB(a1, Answers.get(0), a2, Answers.get(1), a3, Answers.get(2), a4, Answers.get(3), a5, Answers.get(4), a6, Answers.get(5), a7, Answers.get(6), a8, Answers.get(7), a9, Answers.get(8));
+            setNumberRB(q1, Question.get(0), q2, Question.get(1), q3, Question.get(2), q4, Question.get(3), q5, Question.get(4), q6, Question.get(5), q7, Question.get(6), q8, Question.get(7), q9, Question.get(8));
 
+            for (int i = 0; i < 8; i++) {
+                Log.d("resultAnswer", String.valueOf(Answers.get(i)));
+            }
+            Answers.clear();
+            Question.clear();
     }
 
     //Function->SetNumberToRadioButton
@@ -272,6 +382,10 @@ public class matching extends AppCompatActivity {
         RB8.setText(N8);
         RB9.setText(N9);
 
+    }
+
+    public String formatNum(float num){
+        return NumberFormat.getInstance().format(num);
     }
 
     //Function->Button
@@ -431,6 +545,19 @@ public class matching extends AppCompatActivity {
     }
 
 
+    public void RadioButtonShow(RadioButton R1,RadioButton R2,RadioButton R3,RadioButton R4,RadioButton R5,RadioButton R6,RadioButton R7,RadioButton R8,RadioButton R9){
+        R1.setVisibility(View.VISIBLE);
+        R2.setVisibility(View.VISIBLE);
+        R3.setVisibility(View.VISIBLE);
+        R4.setVisibility(View.VISIBLE);
+        R5.setVisibility(View.VISIBLE);
+        R6.setVisibility(View.VISIBLE);
+        R7.setVisibility(View.VISIBLE);
+        R8.setVisibility(View.VISIBLE);
+        R9.setVisibility(View.VISIBLE);
+    }
+
+
 
     public void GameOver(){
         ResetRadioButton();
@@ -454,12 +581,34 @@ public class matching extends AppCompatActivity {
     //CorrectAnswer
     public void CorrectAnswer(int getCurrentCoins,int getEarnedCoins,RadioButton s,RadioButton r){
         int solver =MainActivity.prefs.getInt("Solver",9);
+        int getCurrentLevel = MainActivity.prefs.getInt("getLevelSelected",0);
         solver--;
         MainActivity.editor.putInt("Solver",solver);
         MainActivity.editor.commit();
         Log.d("SolverCount",String.valueOf(MainActivity.prefs.getInt("Solver",0)));
         if (solver == 0){
-            Toast.makeText(this, "Next Level", Toast.LENGTH_SHORT).show();
+            if (MainActivity.prefs.getString("selectlevel", null).equals("level1")){
+                if (MainActivity.prefs.getInt("getLevelSelected",0) == 31){
+                    Toast.makeText(this, "Congrats", Toast.LENGTH_SHORT).show();
+                }else{
+                    CheckAndNextLVL(getCurrentLevel);
+                    QandAGenerate();
+                }
+            }else if (MainActivity.prefs.getString("selectlevel", null).equals("level31")){
+                if (MainActivity.prefs.getInt("getLevelSelected",0) == 61){
+                    Toast.makeText(this, "Congrats", Toast.LENGTH_SHORT).show();
+                }else{
+                    CheckAndNextLVL(getCurrentLevel);
+                    QandAGenerate();
+                }
+            }else if (MainActivity.prefs.getString("selectlevel", null).equals("level61")){
+                if (MainActivity.prefs.getInt("getLevelSelected",0) == 91){
+                    Toast.makeText(this, "Congrats", Toast.LENGTH_SHORT).show();
+                }else{
+                    CheckAndNextLVL(getCurrentLevel);
+                    QandAGenerate();
+                }
+            }
         }else {
             getCurrentCoins++;
             getEarnedCoins++;
@@ -467,12 +616,94 @@ public class matching extends AppCompatActivity {
             MainActivity.editor.putInt("earnedCoins", getEarnedCoins);
             MainActivity.editor.putInt("Coins", getCurrentCoins);
             MainActivity.editor.apply();
+            s.startAnimation(animSpinOut);
+            r.startAnimation(animSpinOut);
             s.setVisibility(View.GONE);
             r.setVisibility(View.GONE);
             ResetRadioButton();
         }
     }
 
+    //Function->NextLVL
+    public void CheckAndNextLVL(int getCurrentLevel){
+        getCurrentLevel++;
+        MainActivity.editor.putInt("getLevelSelected",getCurrentLevel);
+        MainActivity.editor.commit();
+        Log.d("ShowCurrentLevel",String.valueOf(MainActivity.prefs.getInt("getLevelSelected",0)));
+        RadioButtonShow(q1,q2,q3,q4,q5,q6,q7,q8,q9);
+        RadioButtonShow(a1,a2,a3,a4,a5,a6,a7,a8,a9);
+        ResetRadioButton();
+
+
+        if (MainActivity.prefs.getString("selectlevel", null).equals("level1")) {
+            if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("MaddLevel", 1);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("MaddLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            } else if (MainActivity.prefs.getString("operation", null).equals("Subraction")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("MsubLevel", 1);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("MsubLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("MmulLevel", 1);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("MmulLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            } else if (MainActivity.prefs.getString("operation", null).equals("Division")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("MdiviLevel", 1);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("MdiviLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            }
+        }else if (MainActivity.prefs.getString("selectlevel", null).equals("level31")) {
+            if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("M31addLevel", 31);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("M31addLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            } else if (MainActivity.prefs.getString("operation", null).equals("Subraction")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("M31subLevel", 31);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("M31subLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("M31mulLevel", 31);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("M31mulLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            } else if (MainActivity.prefs.getString("operation", null).equals("Division")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("M31diviLevel", 31);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("M31diviLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            }
+        }else if (MainActivity.prefs.getString("selectlevel", null).equals("level61")) {
+            if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("M61addLevel", 61);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("M61addLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            } else if (MainActivity.prefs.getString("operation", null).equals("Subraction")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("M61subLevel", 61);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("M61subLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("M61mulLevel", 61);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("M61mulLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            } else if (MainActivity.prefs.getString("operation", null).equals("Division")) {
+                int getLevelUnlock = MainActivity.prefs.getInt("M61diviLevel", 61);
+                getLevelUnlock++;
+                MainActivity.editor.putInt("M61diviLevel", getLevelUnlock);
+                MainActivity.editor.apply();
+            }
+        }
+
+    }
 
     //ImplementUI();
     public void ImplementUI(){
@@ -503,17 +734,22 @@ public class matching extends AppCompatActivity {
         heart = findViewById(R.id.heart);
         coins =findViewById(R.id.coins);
         life =findViewById(R.id.life);
+        backBtn =findViewById(R.id.backtoLevel);
+        formMatching = findViewById(R.id.formMatching);
+        ImgCoins = findViewById(R.id.ImgCoins);
 
 
         //Animation
         Pulse = AnimationUtils.loadAnimation(matching.this,R.anim.pulse);
-
+        animSpinOut = AnimationUtils.loadAnimation(matching.this,R.anim.spin_out);
+        animZF_In_Out = AnimationUtils.loadAnimation(matching.this,R.anim.fade_in_with_zoom_in);
 
         //Start Animation
         heart.startAnimation(Pulse);
+        levels.FlipAnimator(getApplicationContext(),ImgCoins);
+
 
         //Reset SharedPreference
-        MainActivity.editor.remove("Solver").commit();
         MainActivity.editor.remove("earnedCoins").commit();
 
     }

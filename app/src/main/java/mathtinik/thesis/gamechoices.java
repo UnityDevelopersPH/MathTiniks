@@ -118,15 +118,70 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
                     startActivity(intent);
                 }
 
+                MainActivity.editor.putString("MLevelSelected","Easy").commit();
+
                 MainActivity.editor.remove("getLevelSelected").commit();
 
                 break;
             case R.id.mediums:
-                Intent intent = new Intent(gamechoices.this,matching.class);
-                startActivity(intent);
+                if (getMath.equals("Addition")){
+                    MainActivity.editor.putString("operation","Addition");
+                    MainActivity.editor.commit();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
+                }else if(getMath.equals("Subraction")){
+                    MainActivity.editor.putString("operation","Subraction");
+                    MainActivity.editor.commit();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
+                }else if(getMath.equals("Multiplication")){
+                    MainActivity.editor.putString("operation","Multiplication");
+                    MainActivity.editor.commit();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
+                }else if(getMath.equals("Division")){
+                    MainActivity.editor.putString("operation","Division");
+                    MainActivity.editor.commit();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
+                }
+
+
+                MainActivity.editor.putString("MLevelSelected","Medium").commit();
                 break;
             case R.id.hards:
-                Log.d("ws","success hards");
+                if (getMath.equals("Addition")){
+                    MainActivity.editor.putString("operation","Addition");
+                    MainActivity.editor.commit();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
+                }else if(getMath.equals("Subraction")){
+                    MainActivity.editor.putString("operation","Subraction");
+                    MainActivity.editor.commit();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
+                }else if(getMath.equals("Multiplication")){
+                    MainActivity.editor.putString("operation","Multiplication");
+                    MainActivity.editor.commit();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
+                }else if(getMath.equals("Division")){
+                    MainActivity.editor.putString("operation","Division");
+                    MainActivity.editor.commit();
+                    Log.d("result",MainActivity.prefs.getString("operation",null));
+                    Intent intent = new Intent(gamechoices.this,level_choice.class);
+                    startActivity(intent);
+                }
+
+
+                MainActivity.editor.putString("MLevelSelected","Hard").commit();
                 break;
             default:
                 break;

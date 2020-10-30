@@ -348,7 +348,7 @@ public class challenge_template extends AppCompatActivity {
                        checkAns = Fnum1 - Fnum2;
                    } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
                        checkAns = Fnum1 * Fnum2;
-                   } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
+                   } else if (MainActivity.prefs.getString("operation", null).equals("Division")) {
                        checkAns = Fnum1 / Fnum2;
                    }
 
@@ -370,17 +370,17 @@ public class challenge_template extends AppCompatActivity {
                                getLevelUnlock++;
                                MainActivity.editor.putInt("addLevel", getLevelUnlock);
                                MainActivity.editor.apply();
-                           } else if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
+                           } else if (MainActivity.prefs.getString("operation", null).equals("Subraction")) {
                                int getLevelUnlock = MainActivity.prefs.getInt("subLevel", 1);
                                getLevelUnlock++;
                                MainActivity.editor.putInt("subLevel", getLevelUnlock);
                                MainActivity.editor.apply();
-                           } else if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
+                           } else if (MainActivity.prefs.getString("operation", null).equals("Multiplication")) {
                                int getLevelUnlock = MainActivity.prefs.getInt("mulLevel", 1);
                                getLevelUnlock++;
                                MainActivity.editor.putInt("mulLevel", getLevelUnlock);
                                MainActivity.editor.apply();
-                           } else if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
+                           } else if (MainActivity.prefs.getString("operation", null).equals("Division")) {
                                int getLevelUnlock = MainActivity.prefs.getInt("diviLevel", 1);
                                getLevelUnlock++;
                                MainActivity.editor.putInt("diviLevel", getLevelUnlock);

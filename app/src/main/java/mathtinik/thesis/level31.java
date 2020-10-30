@@ -20,7 +20,7 @@ public class level31 extends AppCompatActivity {
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     level31Adapter levelAdapter;
-    ImageView backtoChoose;
+    ImageView backtoChoose,coins;
     TextView coinCount,selectOperation;
 
 
@@ -30,7 +30,8 @@ public class level31 extends AppCompatActivity {
         setContentView(R.layout.level31);
 
 
-
+        coins = findViewById(R.id.coins);
+        levels.FlipAnimator(getApplicationContext(),coins);
 
 
         recyclerView = findViewById(R.id.recyclerView);
