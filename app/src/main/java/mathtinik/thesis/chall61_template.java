@@ -257,14 +257,23 @@ public class chall61_template extends AppCompatActivity {
             Log.d("yesSir", String.valueOf(lvlCountFinal));
             if (lvlCountFinal >= 61 && lvlCountFinal <= 70) {
                 num1 = rand.nextInt(10) * 5;
+                if (num1 == 0){
+                    num1 = rand.nextInt(11)*3;
+                }
                 num2 = 11;
             }
             if (lvlCountFinal >= 11 && lvlCountFinal <= 20) {
                 num1 = rand.nextInt(10) * 8;
+                if (num1 == 0){
+                    num1 = rand.nextInt(11)*3;
+                }
                 num2 = 11;
             }
             if (lvlCountFinal >= 21 && lvlCountFinal <= 30) {
                 num1 = rand.nextInt(10) * 11;
+                if (num1 == 0){
+                    num1 = rand.nextInt(11)*3;
+                }
                 num2 = 11;
             }
         } else {

@@ -126,7 +126,7 @@ public class level61Adapter extends RecyclerView.Adapter<level61Adapter.LevelHol
 
             if (!num_level.getText().toString().equals("")){
                 if (MainActivity.prefs.getString("MLevelSelected",null).equals("Easy")) {
-                    Intent intent = new Intent(context, challenge_template.class);
+                    Intent intent = new Intent(context, chall61_template.class);
                     context.startActivity(intent);
                 }else if(MainActivity.prefs.getString("MLevelSelected",null).equals("Medium")) {
                     Intent intent = new Intent(context, matching.class);

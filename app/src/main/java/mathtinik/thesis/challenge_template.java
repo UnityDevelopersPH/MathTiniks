@@ -258,14 +258,23 @@ public class challenge_template extends AppCompatActivity {
                Log.d("yesSir",String.valueOf(lvlCountFinal));
                if (lvlCountFinal >= 1 && lvlCountFinal <= 10) {
                    num1 = rand.nextInt(11)*3;
+                   if (num1 == 0){
+                       num1 = rand.nextInt(11)*3;
+                   }
                    num2 = 3;
                }
                if (lvlCountFinal >= 11 && lvlCountFinal <= 20) {
                    num1 = rand.nextInt(10)*6;
+                   if (num1 == 0){
+                       num1 = rand.nextInt(11)*3;
+                   }
                    num2 = 6;
                }
                if (lvlCountFinal >= 21 && lvlCountFinal <= 30) {
                    num1 = rand.nextInt(10)*9;
+                   if (num1 == 0){
+                       num1 = rand.nextInt(11)*3;
+                   }
                    num2 = 9;
                }
            }else{

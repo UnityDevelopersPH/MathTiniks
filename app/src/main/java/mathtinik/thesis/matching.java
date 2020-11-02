@@ -582,28 +582,29 @@ public class matching extends AppCompatActivity {
     public void CorrectAnswer(int getCurrentCoins,int getEarnedCoins,RadioButton s,RadioButton r){
         int solver =MainActivity.prefs.getInt("Solver",9);
         int getCurrentLevel = MainActivity.prefs.getInt("getLevelSelected",0);
+        getCurrentLevel++;
         solver--;
         MainActivity.editor.putInt("Solver",solver);
         MainActivity.editor.commit();
         Log.d("SolverCount",String.valueOf(MainActivity.prefs.getInt("Solver",0)));
         if (solver == 0){
-            if (MainActivity.prefs.getString("selectlevel", null).equals("level1")){
-                if (MainActivity.prefs.getInt("getLevelSelected",0) == 31){
-                    Toast.makeText(this, "Congrats", Toast.LENGTH_SHORT).show();
+            if (MainActivity.prefs.getString("selectlevel",null).equals("level1")){
+                if (getCurrentLevel == 31){
+                    Toast.makeText(this, "Fuck you", Toast.LENGTH_SHORT).show();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
                 }
-            }else if (MainActivity.prefs.getString("selectlevel", null).equals("level31")){
-                if (MainActivity.prefs.getInt("getLevelSelected",0) == 61){
-                    Toast.makeText(this, "Congrats", Toast.LENGTH_SHORT).show();
+            }else if (MainActivity.prefs.getString("selectlevel",null).equals("level31")){
+                if (getCurrentLevel == 61){
+                    Toast.makeText(this, "Fuck you", Toast.LENGTH_SHORT).show();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
                 }
-            }else if (MainActivity.prefs.getString("selectlevel", null).equals("level61")){
-                if (MainActivity.prefs.getInt("getLevelSelected",0) == 91){
-                    Toast.makeText(this, "Congrats", Toast.LENGTH_SHORT).show();
+            }else if (MainActivity.prefs.getString("selectlevel",null).equals("level61")){
+                if (getCurrentLevel == 91){
+                    Toast.makeText(this, "Fuck you", Toast.LENGTH_SHORT).show();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
