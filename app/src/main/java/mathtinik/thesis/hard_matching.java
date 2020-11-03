@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -36,6 +37,9 @@ public class hard_matching extends AppCompatActivity {
     ImageView heart, backBtn,ImgCoins;
     Animation Pulse, animSpinOut, animZF_In_Out;
     LinearLayout formMatching;
+    CountDownTimer ctimer;
+    int s30,s45;
+    TextView timer;
 
     String getA1, getA2, getA3, getA4, getA5, getA6, getA7, getA8, getA9;
     float getQ1, getQ2, getQ3, getQ4, getQ5, getQ6, getQ7, getQ8, getQ9;
@@ -302,6 +306,12 @@ public class hard_matching extends AppCompatActivity {
 
 
     public void QandAGenerate() {
+        if (MainActivity.prefs.getString("selectlevel", null).equals("level1") || MainActivity.prefs.getString("selectlevel", null).equals("level31")) {
+            s30Timer();
+        }
+        if (MainActivity.prefs.getString("selectlevel", null).equals("level61")) {
+            s45Timer();
+        }
         formMatching.startAnimation(animZF_In_Out);
         MainActivity.editor.remove("Solver").commit();
         Random rand = new Random();
@@ -737,6 +747,7 @@ public class hard_matching extends AppCompatActivity {
         backBtn =findViewById(R.id.backtoLevel);
         formMatching = findViewById(R.id.formMatching);
         ImgCoins =findViewById(R.id.ImgCoins);
+        timer = findViewById(R.id.timer);
 
 
         //Animation
@@ -764,5 +775,48 @@ public class hard_matching extends AppCompatActivity {
 
         return false;
         // Disable back button..............
+    }
+
+    public void s30Timer(){
+        if(ctimer!=null){
+            ctimer.cancel();
+        }
+
+        s30 = 30;
+        ctimer = new CountDownTimer(30000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                s30--;
+                timer.setText(Integer.toString(s30));
+            }
+
+            @Override
+            public void onFinish() {
+                GameOver();
+            }
+        };
+
+        ctimer.start();
+    }
+
+    public void s45Timer(){
+        if(ctimer!=null){
+            ctimer.cancel();
+        }
+        s45 = 45;
+        ctimer = new CountDownTimer(45000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                s45--;
+                timer.setText(Integer.toString(s45));
+            }
+
+            @Override
+            public void onFinish() {
+                GameOver();
+            }
+        };
+
+        ctimer.start();
     }
 }

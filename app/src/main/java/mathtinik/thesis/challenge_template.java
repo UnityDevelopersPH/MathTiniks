@@ -266,14 +266,14 @@ public class challenge_template extends AppCompatActivity {
                if (lvlCountFinal >= 11 && lvlCountFinal <= 20) {
                    num1 = rand.nextInt(10)*6;
                    if (num1 == 0){
-                       num1 = rand.nextInt(11)*3;
+                       num1 = rand.nextInt(11)*6;
                    }
                    num2 = 6;
                }
                if (lvlCountFinal >= 21 && lvlCountFinal <= 30) {
                    num1 = rand.nextInt(10)*9;
                    if (num1 == 0){
-                       num1 = rand.nextInt(11)*3;
+                       num1 = rand.nextInt(11)*9;
                    }
                    num2 = 9;
                }

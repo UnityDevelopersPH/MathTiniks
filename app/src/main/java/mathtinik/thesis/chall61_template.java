@@ -258,21 +258,21 @@ public class chall61_template extends AppCompatActivity {
             if (lvlCountFinal >= 61 && lvlCountFinal <= 70) {
                 num1 = rand.nextInt(10) * 5;
                 if (num1 == 0){
-                    num1 = rand.nextInt(11)*3;
+                    num1 = rand.nextInt(11)*5;
                 }
-                num2 = 11;
+                num2 = 5;
             }
-            if (lvlCountFinal >= 11 && lvlCountFinal <= 20) {
+            if (lvlCountFinal >= 71 && lvlCountFinal <= 80) {
                 num1 = rand.nextInt(10) * 8;
                 if (num1 == 0){
-                    num1 = rand.nextInt(11)*3;
+                    num1 = rand.nextInt(10)*8;
                 }
-                num2 = 11;
+                num2 =8;
             }
-            if (lvlCountFinal >= 21 && lvlCountFinal <= 30) {
+            if (lvlCountFinal >= 81 && lvlCountFinal <= 90) {
                 num1 = rand.nextInt(10) * 11;
                 if (num1 == 0){
-                    num1 = rand.nextInt(11)*3;
+                    num1 = rand.nextInt(10)*11;
                 }
                 num2 = 11;
             }
