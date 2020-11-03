@@ -324,18 +324,39 @@ public class matching extends AppCompatActivity {
 
                 if (MainActivity.prefs.getString("selectlevel", null).equals("level1")) {
 
-                    num1 = rand.nextInt(13) + 1;
-                    num2 = rand.nextInt(13) + 1;
+                    num1 = rand.nextInt(13-1) + 1;
+                    num2 = rand.nextInt(13-1) + 1;
+                    if (num2 == 0){
+                        num2 = 1;
+                    }
+
+                    if (num1 == 0){
+                        num1 = 1;
+                    }
 
                 }
                 if (MainActivity.prefs.getString("selectlevel", null).equals("level31")) {
-                    num1 = rand.nextInt(20) * 2;
-                    num2 = rand.nextInt(20) * 2;
+                    num1 = rand.nextInt(20-1) * 2;
+                    num2 = rand.nextInt(20-1) * 2;
+                    if (num2 == 0){
+                        num2 = 1;
+                    }
+
+                    if (num1 == 0){
+                        num1 = 1;
+                    }
 
                 }
                 if (MainActivity.prefs.getString("selectlevel", null).equals("level61")) {
-                    num1 = rand.nextInt(25) * 4;
-                    num2 = rand.nextInt(25) * 4;
+                    num1 = rand.nextInt(25-1) * 4;
+                    num2 = rand.nextInt(25-1) * 4;
+                    if (num2 == 0){
+                        num2 = 1;
+                    }
+
+                    if (num1 == 0){
+                        num1 = 1;
+                    }
                 }
                 if (num1 >= num2) {
                     if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
@@ -612,6 +633,10 @@ public class matching extends AppCompatActivity {
     }
 
     public void CongratsDiag(){
+        if(ctimer!=null){
+            ctimer.cancel();
+        }
+
         ResetRadioButton();
         final AlertDialog gdialog = new AlertDialog.Builder(matching.this).create();
         LayoutInflater ginflater = getLayoutInflater();
@@ -659,26 +684,29 @@ public class matching extends AppCompatActivity {
         int getCurrentLevel = MainActivity.prefs.getInt("getLevelSelected",0);
         getCurrentLevel++;
         solver--;
+        Log.d("s",String.valueOf(MainActivity.prefs.getInt("getLevelSelected",0)));
         MainActivity.editor.putInt("Solver",solver);
         MainActivity.editor.commit();
         Log.d("SolverCount",String.valueOf(MainActivity.prefs.getInt("Solver",0)));
         if (solver == 0){
             if (MainActivity.prefs.getString("selectlevel",null).equals("level1")){
-                if (getCurrentLevel == 31){
+                if (MainActivity.prefs.getInt("getLevelSelected",0) == 31){
                     CongratsDiag();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
                 }
-            }else if (MainActivity.prefs.getString("selectlevel",null).equals("level31")){
-                if (getCurrentLevel == 61){
+            }
+            if (MainActivity.prefs.getString("selectlevel",null).equals("level31")){
+                if (MainActivity.prefs.getInt("getLevelSelected",0) == 61){
                     CongratsDiag();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
                 }
-            }else if (MainActivity.prefs.getString("selectlevel",null).equals("level61")){
-                if (getCurrentLevel == 91){
+            }
+            if (MainActivity.prefs.getString("selectlevel",null).equals("level61")){
+                if (MainActivity.prefs.getInt("getLevelSelected",0) == 91){
                     CongratsDiag();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);

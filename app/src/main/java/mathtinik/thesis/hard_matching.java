@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -37,7 +38,6 @@ public class hard_matching extends AppCompatActivity {
     ImageView heart, backBtn,ImgCoins;
     Animation Pulse, animSpinOut, animZF_In_Out;
     LinearLayout formMatching;
-    CountDownTimer ctimer;
     int s30,s45;
     TextView timer;
 
@@ -306,12 +306,6 @@ public class hard_matching extends AppCompatActivity {
 
 
     public void QandAGenerate() {
-        if (MainActivity.prefs.getString("selectlevel", null).equals("level1") || MainActivity.prefs.getString("selectlevel", null).equals("level31")) {
-            s30Timer();
-        }
-        if (MainActivity.prefs.getString("selectlevel", null).equals("level61")) {
-            s45Timer();
-        }
         formMatching.startAnimation(animZF_In_Out);
         MainActivity.editor.remove("Solver").commit();
         Random rand = new Random();
@@ -326,15 +320,39 @@ public class hard_matching extends AppCompatActivity {
                 num1 = rand.nextInt(13) + 1;
                 num2 = rand.nextInt(13) + 1;
 
+                if (num2 == 0){
+                    num2 = 1;
+                }
+
+                if (num1 == 0){
+                    num1 = 1;
+                }
+
             }
             if (MainActivity.prefs.getString("selectlevel", null).equals("level31")) {
                 num1 = rand.nextInt(20) * 2;
                 num2 = rand.nextInt(20) * 2;
 
+                if (num2 == 0){
+                    num2 = 1;
+                }
+
+                if (num1 == 0){
+                    num1 = 1;
+                }
+
             }
             if (MainActivity.prefs.getString("selectlevel", null).equals("level61")) {
                 num1 = rand.nextInt(25) * 4;
                 num2 = rand.nextInt(25) * 4;
+
+                if (num2 == 0){
+                    num2 = 1;
+                }
+
+                if (num1 == 0){
+                    num1 = 1;
+                }
             }
             if (num1 >= num2) {
                 if (MainActivity.prefs.getString("operation", null).equals("Addition")) {
@@ -597,22 +615,24 @@ public class hard_matching extends AppCompatActivity {
         Log.d("SolverCount", String.valueOf(MainActivity.prefs.getInt("Solver", 0)));
         if (solver == 0) {
             if (MainActivity.prefs.getString("selectlevel",null).equals("level1")){
-                if (getCurrentLevel == 31){
-                    Toast.makeText(this, "Fuck you", Toast.LENGTH_SHORT).show();
+                if (MainActivity.prefs.getInt("getLevelSelected",0) == 31){
+                    CongratsDiag();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
                 }
-            }else if (MainActivity.prefs.getString("selectlevel",null).equals("level31")){
-                if (getCurrentLevel == 61){
-                    Toast.makeText(this, "Fuck you", Toast.LENGTH_SHORT).show();
+            }
+            if (MainActivity.prefs.getString("selectlevel",null).equals("level31")){
+                if (MainActivity.prefs.getInt("getLevelSelected",0) == 61){
+                    CongratsDiag();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
                 }
-            }else if (MainActivity.prefs.getString("selectlevel",null).equals("level61")){
-                if (getCurrentLevel == 91){
-                    Toast.makeText(this, "Fuck you", Toast.LENGTH_SHORT).show();
+            }
+            if (MainActivity.prefs.getString("selectlevel",null).equals("level61")){
+                if (MainActivity.prefs.getInt("getLevelSelected",0) == 91){
+                    CongratsDiag();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
@@ -631,6 +651,46 @@ public class hard_matching extends AppCompatActivity {
             r.setVisibility(View.GONE);
             ResetRadioButton();
         }
+    }
+
+    public void CongratsDiag(){
+
+        ResetRadioButton();
+        final AlertDialog gdialog = new AlertDialog.Builder(hard_matching.this).create();
+        LayoutInflater ginflater = getLayoutInflater();
+        View gView = ginflater.inflate(R.layout.congrats,null);
+        TextView CoinsEarned = gView.findViewById(R.id.earnCoins);
+        Button close = gView.findViewById(R.id.backToGame);
+        CoinsEarned.setText(String.valueOf(MainActivity.prefs.getInt("Coins",0)));
+        gdialog.setView(gView);
+        gdialog.setCanceledOnTouchOutside(true);
+        gdialog.setCancelable(false);
+
+        gdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity.prefs.getString("selectlevel", null).equals("level1")) {
+                    Intent intent = new Intent(getApplicationContext(),levels.class);
+                    startActivity(intent);
+                    finish();
+
+                }else if (MainActivity.prefs.getString("selectlevel", null).equals("level31")) {
+                    Intent intent = new Intent(getApplicationContext(),level31.class);
+                    startActivity(intent);
+                    finish();
+
+                }else if (MainActivity.prefs.getString("selectlevel", null).equals("level61")) {
+                    Intent intent = new Intent(getApplicationContext(),level61.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }
+        });
+
+        gdialog.show();
     }
 
     //Function->NextLVL
@@ -777,46 +837,4 @@ public class hard_matching extends AppCompatActivity {
         // Disable back button..............
     }
 
-    public void s30Timer(){
-        if(ctimer!=null){
-            ctimer.cancel();
-        }
-
-        s30 = 30;
-        ctimer = new CountDownTimer(30000,1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                s30--;
-                timer.setText(Integer.toString(s30));
-            }
-
-            @Override
-            public void onFinish() {
-                GameOver();
-            }
-        };
-
-        ctimer.start();
-    }
-
-    public void s45Timer(){
-        if(ctimer!=null){
-            ctimer.cancel();
-        }
-        s45 = 45;
-        ctimer = new CountDownTimer(45000,1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                s45--;
-                timer.setText(Integer.toString(s45));
-            }
-
-            @Override
-            public void onFinish() {
-                GameOver();
-            }
-        };
-
-        ctimer.start();
-    }
 }
