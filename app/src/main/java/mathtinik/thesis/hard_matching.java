@@ -593,6 +593,7 @@ public class hard_matching extends AppCompatActivity {
         LayoutInflater ginflater = getLayoutInflater();
         View gView = ginflater.inflate(R.layout.gameover, null);
         TextView CoinsEarned = gView.findViewById(R.id.getCoins);
+        Button close = gView.findViewById(R.id.close_gameover);
         CoinsEarned.setText(String.valueOf(MainActivity.prefs.getInt("earnedCoins", 0)));
         gdialog.setView(gView);
         gdialog.setCanceledOnTouchOutside(true);
@@ -601,6 +602,28 @@ public class hard_matching extends AppCompatActivity {
         gdialog.getWindow().getAttributes().windowAnimations = R.style.DialogScale;
 
         gdialog.show();
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity.prefs.getString("selectlevel", null).equals("level1")) {
+                    Intent intent = new Intent(getApplicationContext(),levels.class);
+                    startActivity(intent);
+                    finish();
+
+                }else if (MainActivity.prefs.getString("selectlevel", null).equals("level31")) {
+                    Intent intent = new Intent(getApplicationContext(),level31.class);
+                    startActivity(intent);
+                    finish();
+
+                }else if (MainActivity.prefs.getString("selectlevel", null).equals("level61")) {
+                    Intent intent = new Intent(getApplicationContext(),level61.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }
+        });
     }
 
 

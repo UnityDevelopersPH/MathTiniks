@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name=".MusicService"
-            android:enabled="true"/>
-
         <activity android:name=".unlock" />
         <activity android:name=".question_template" />
         <activity android:name=".challenge_template" />
@@ -34,6 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".MusicBg" android:stopWithTask="true"/>
     </application>
 
 </manifest>

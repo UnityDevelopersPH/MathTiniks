@@ -35,9 +35,7 @@ public class MainActivity extends AppCompatActivity {
     AudioManager audioManager;
     ImageView settings;
     int maxVolume,currentVolume;
-
-    MediaPlayer bgMusic;
-
+    Intent musicBG;
     public static ArrayList<String> one_30;
     public static ArrayList<String> t_60;
     public static ArrayList<String> s_90;
@@ -58,11 +56,8 @@ public class MainActivity extends AppCompatActivity {
         for (int s = 61; s<=90;s++){
             s_90.add(""+s);
         }
-
-        doBindService();
-        Intent music = new Intent();
-        music.setClass(this, MusicService.class);
-        startService(music);
+        musicBG = new Intent(MainActivity.this, MusicBg.class);
+        startService(musicBG);
 
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -71,10 +66,6 @@ public class MainActivity extends AppCompatActivity {
         exitapp = findViewById(R.id.exit);
         editor = getSharedPreferences("StoringData", MODE_PRIVATE).edit();
         prefs = getSharedPreferences("StoringData", MODE_PRIVATE);
-
-        //Music Background
-        bgMusic =MediaPlayer.create(getApplicationContext(),R.raw.music_bg);
-
 
         editor.remove("operation");
         editor.commit();
@@ -180,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         System.exit(0);
+                        stopService(musicBG);
                     }
                 });
                 noExit.setOnClickListener(new View.OnClickListener() {
@@ -194,76 +186,4 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-    //Music Play Background
-    private boolean mIsBound =false;
-    private  MusicService mServ;
-    private ServiceConnection Scon = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder binder) {
-            mServ = ((MusicService.ServiceBinder)binder).getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            mServ =null;
-        }
-    };
-
-    void doBindService(){
-        bindService(new Intent(this,MusicService.class),
-                Scon,Context.BIND_AUTO_CREATE);
-        mIsBound = true;
-    }
-
-    void doUnbindService()
-    {
-        if(mIsBound)
-        {
-            unbindService(Scon);
-            mIsBound = false;
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (mServ != null) {
-            mServ.resumeMusic();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        //UNBIND music service
-        doUnbindService();
-        Intent music = new Intent();
-        music.setClass(this,MusicService.class);
-        stopService(music);
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        //Detect idle screen
-        PowerManager pm = (PowerManager)
-                getSystemService(Context.POWER_SERVICE);
-        boolean isScreenOn = false;
-        if (pm != null) {
-            isScreenOn = pm.isScreenOn();
-        }
-
-        if (!isScreenOn) {
-            if (mServ != null) {
-                mServ.pauseMusic();
-            }
-        }
-    }
-
-
 }
