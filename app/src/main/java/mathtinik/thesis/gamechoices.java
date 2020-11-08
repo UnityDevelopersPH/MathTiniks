@@ -98,24 +98,28 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }else if(getMath.equals("Subraction")){
                     MainActivity.editor.putString("operation","Subraction");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }else if(getMath.equals("Multiplication")){
                     MainActivity.editor.putString("operation","Multiplication");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }else if(getMath.equals("Division")){
                     MainActivity.editor.putString("operation","Division");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }
 
                 MainActivity.editor.putString("MLevelSelected","Easy").commit();
@@ -130,24 +134,28 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }else if(getMath.equals("Subraction")){
                     MainActivity.editor.putString("operation","Subraction");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }else if(getMath.equals("Multiplication")){
                     MainActivity.editor.putString("operation","Multiplication");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }else if(getMath.equals("Division")){
                     MainActivity.editor.putString("operation","Division");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }
 
 
@@ -160,24 +168,28 @@ public class gamechoices extends AppCompatActivity implements Animation.Animatio
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }else if(getMath.equals("Subraction")){
                     MainActivity.editor.putString("operation","Subraction");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }else if(getMath.equals("Multiplication")){
                     MainActivity.editor.putString("operation","Multiplication");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }else if(getMath.equals("Division")){
                     MainActivity.editor.putString("operation","Division");
                     MainActivity.editor.commit();
                     Log.d("result",MainActivity.prefs.getString("operation",null));
                     Intent intent = new Intent(gamechoices.this,level_choice.class);
                     startActivity(intent);
+                    finish();
                 }
 
 

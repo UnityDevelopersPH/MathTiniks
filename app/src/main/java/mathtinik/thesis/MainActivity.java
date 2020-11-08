@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                Intent choice = new Intent(getApplicationContext(), gamechoices.class);
                startActivity(choice);
+               finish();
             }
         });
 

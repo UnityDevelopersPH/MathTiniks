@@ -419,6 +419,7 @@ public class chall61_template extends AppCompatActivity {
                             public void onClick(View v) {
                                 Intent backToHome = new Intent(chall61_template.this, gamechoices.class);
                                 startActivity(backToHome);
+                                finish();
                             }
                         });
                         gdialog.setCanceledOnTouchOutside(true);
@@ -473,6 +474,7 @@ public class chall61_template extends AppCompatActivity {
                             public void onClick(View v) {
                                 Intent backToHome = new Intent(chall61_template.this,gamechoices.class);
                                 startActivity(backToHome);
+                                finish();
                             }
                         });
                         gdialog.setCanceledOnTouchOutside(true);

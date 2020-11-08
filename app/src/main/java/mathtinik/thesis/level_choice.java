@@ -145,6 +145,7 @@ public class level_choice extends AppCompatActivity {
                 MainActivity.editor.commit();
                 Intent intent = new Intent(getApplicationContext(),levels.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -239,6 +240,7 @@ public class level_choice extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(),level31.class);
                     startActivity(intent);
+                    finish();
                 }
 
 
@@ -334,6 +336,7 @@ public class level_choice extends AppCompatActivity {
                     MainActivity.editor.commit();
                     Intent intent = new Intent(getApplicationContext(),level61.class);
                     startActivity(intent);
+                    finish();
                 }
 
             }
@@ -344,7 +347,7 @@ public class level_choice extends AppCompatActivity {
             public void onClick(View v) {
                 Intent b = new Intent(getApplicationContext(), gamechoices.class);
                 startActivity(b);
-                finishActivity(1);
+                finish();
             }
         });
 

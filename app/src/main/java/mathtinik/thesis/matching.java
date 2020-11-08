@@ -682,7 +682,6 @@ public class matching extends AppCompatActivity {
     public void CorrectAnswer(int getCurrentCoins,int getEarnedCoins,RadioButton s,RadioButton r){
         int solver =MainActivity.prefs.getInt("Solver",9);
         int getCurrentLevel = MainActivity.prefs.getInt("getLevelSelected",0);
-        getCurrentLevel++;
         solver--;
         Log.d("s",String.valueOf(MainActivity.prefs.getInt("getLevelSelected",0)));
         MainActivity.editor.putInt("Solver",solver);

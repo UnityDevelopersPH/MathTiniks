@@ -631,7 +631,6 @@ public class hard_matching extends AppCompatActivity {
     public void CorrectAnswer(int getCurrentCoins, int getEarnedCoins, RadioButton s, RadioButton r) {
         int solver = MainActivity.prefs.getInt("Solver", 9);
         int getCurrentLevel = MainActivity.prefs.getInt("getLevelSelected", 0);
-        getCurrentLevel++;
         solver--;
         MainActivity.editor.putInt("Solver", solver);
         MainActivity.editor.commit();
