@@ -631,13 +631,14 @@ public class hard_matching extends AppCompatActivity {
     public void CorrectAnswer(int getCurrentCoins, int getEarnedCoins, RadioButton s, RadioButton r) {
         int solver = MainActivity.prefs.getInt("Solver", 9);
         int getCurrentLevel = MainActivity.prefs.getInt("getLevelSelected", 0);
+        getCurrentLevel++;
         solver--;
         MainActivity.editor.putInt("Solver", solver);
         MainActivity.editor.commit();
         Log.d("SolverCount", String.valueOf(MainActivity.prefs.getInt("Solver", 0)));
         if (solver == 0) {
             if (MainActivity.prefs.getString("selectlevel",null).equals("level1")){
-                if (MainActivity.prefs.getInt("getLevelSelected",0) == 31){
+                if (getCurrentLevel == 31){
                     CongratsDiag();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
@@ -645,7 +646,7 @@ public class hard_matching extends AppCompatActivity {
                 }
             }
             if (MainActivity.prefs.getString("selectlevel",null).equals("level31")){
-                if (MainActivity.prefs.getInt("getLevelSelected",0) == 61){
+                if (getCurrentLevel == 61){
                     CongratsDiag();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);
@@ -653,7 +654,7 @@ public class hard_matching extends AppCompatActivity {
                 }
             }
             if (MainActivity.prefs.getString("selectlevel",null).equals("level61")){
-                if (MainActivity.prefs.getInt("getLevelSelected",0) == 91){
+                if (getCurrentLevel == 91){
                     CongratsDiag();
                 }else{
                     CheckAndNextLVL(getCurrentLevel);

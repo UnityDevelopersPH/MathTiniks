@@ -133,15 +133,12 @@ public class levelAdapter extends RecyclerView.Adapter<levelAdapter.LevelHolder>
                 if (MainActivity.prefs.getString("MLevelSelected",null).equals("Easy")) {
                     Intent intent = new Intent(context, challenge_template.class);
                     context.startActivity(intent);
-                    ((Activity)context).finish();
                 }else if(MainActivity.prefs.getString("MLevelSelected",null).equals("Medium")) {
                     Intent intent = new Intent(context, matching.class);
                     context.startActivity(intent);
-                    ((Activity)context).finish();
                 }else if(MainActivity.prefs.getString("MLevelSelected",null).equals("Hard")) {
                     Intent intent = new Intent(context, hard_matching.class);
                     context.startActivity(intent);
-                    ((Activity)context).finish();
                 }
                 MainActivity.editor.putInt("getLevelSelected",Integer.parseInt(num_level.getText().toString()));
                 MainActivity.editor.commit();
