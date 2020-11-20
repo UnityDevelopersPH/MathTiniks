@@ -631,32 +631,29 @@ public class hard_matching extends AppCompatActivity {
     public void CorrectAnswer(int getCurrentCoins, int getEarnedCoins, RadioButton s, RadioButton r) {
         int solver = MainActivity.prefs.getInt("Solver", 9);
         int getCurrentLevel = MainActivity.prefs.getInt("getLevelSelected", 0);
-        getCurrentLevel++;
         solver--;
         MainActivity.editor.putInt("Solver", solver);
         MainActivity.editor.commit();
         Log.d("SolverCount", String.valueOf(MainActivity.prefs.getInt("Solver", 0)));
         if (solver == 0) {
-            if (MainActivity.prefs.getString("selectlevel",null).equals("level1")){
-                if (getCurrentLevel == 31){
+            if (MainActivity.prefs.getString("selectlevel", null).equals("level1")){
+                if (MainActivity.prefs.getInt("getLevelSelected",1) == 30){
                     CongratsDiag();
-                }else{
+                }else {
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
                 }
-            }
-            if (MainActivity.prefs.getString("selectlevel",null).equals("level31")){
-                if (getCurrentLevel == 61){
+            }else if (MainActivity.prefs.getString("selectlevel", null).equals("level31")){
+                if (MainActivity.prefs.getInt("getLevelSelected",1) == 60){
                     CongratsDiag();
-                }else{
+                }else {
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
                 }
-            }
-            if (MainActivity.prefs.getString("selectlevel",null).equals("level61")){
-                if (getCurrentLevel == 91){
+            }else if (MainActivity.prefs.getString("selectlevel", null).equals("level61")){
+                if (MainActivity.prefs.getInt("getLevelSelected",1) == 90){
                     CongratsDiag();
-                }else{
+                }else {
                     CheckAndNextLVL(getCurrentLevel);
                     QandAGenerate();
                 }

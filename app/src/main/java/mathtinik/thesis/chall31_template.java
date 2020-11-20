@@ -441,9 +441,9 @@ public class chall31_template extends AppCompatActivity {
                     if (lvlCount == 61){
                         final AlertDialog gdialog = new AlertDialog.Builder(chall31_template.this).create();
                         LayoutInflater ginflater = getLayoutInflater();
-                        View gView = (View) ginflater.inflate(R.layout.gameover, null);
-                        TextView cgetCoins = gView.findViewById(R.id.getCoins);
-                        Button close_gameover = gView.findViewById(R.id.close_gameover);
+                        View gView = (View) ginflater.inflate(R.layout.congrats, null);
+                        TextView cgetCoins = gView.findViewById(R.id.earnCoins);
+                        Button close_gameover = gView.findViewById(R.id.backToGame);
                         cgetCoins.setText(checkCount.getText().toString());
                         gdialog.setView(gView);
 

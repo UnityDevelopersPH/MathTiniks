@@ -682,50 +682,48 @@ public class matching extends AppCompatActivity {
     public void CorrectAnswer(int getCurrentCoins,int getEarnedCoins,RadioButton s,RadioButton r){
         int solver =MainActivity.prefs.getInt("Solver",9);
         int getCurrentLevel = MainActivity.prefs.getInt("getLevelSelected",0);
-        getCurrentLevel++;
         solver--;
         Log.d("s",String.valueOf(MainActivity.prefs.getInt("getLevelSelected",0)));
         MainActivity.editor.putInt("Solver",solver);
         MainActivity.editor.commit();
         Log.d("SolverCount",String.valueOf(MainActivity.prefs.getInt("Solver",0)));
-        if (solver == 0){
-            if (MainActivity.prefs.getString("selectlevel",null).equals("level1")){
-                if (getCurrentLevel == 31){
-                    CongratsDiag();
-                }else{
-                    CheckAndNextLVL(getCurrentLevel);
-                    QandAGenerate();
+        Log.d("LevelRes",String.valueOf(MainActivity.prefs.getInt("getLevelSelected",0)));
+            if (solver == 0) {
+                if (MainActivity.prefs.getString("selectlevel", null).equals("level1")){
+                    if (MainActivity.prefs.getInt("getLevelSelected",1) == 30){
+                        CongratsDiag();
+                    }else {
+                        CheckAndNextLVL(getCurrentLevel);
+                        QandAGenerate();
+                    }
+                }else if (MainActivity.prefs.getString("selectlevel", null).equals("level31")){
+                    if (MainActivity.prefs.getInt("getLevelSelected",1) == 60){
+                        CongratsDiag();
+                    }else {
+                        CheckAndNextLVL(getCurrentLevel);
+                        QandAGenerate();
+                    }
+                }else if (MainActivity.prefs.getString("selectlevel", null).equals("level61")){
+                    if (MainActivity.prefs.getInt("getLevelSelected",1) == 90){
+                        CongratsDiag();
+                    }else {
+                        CheckAndNextLVL(getCurrentLevel);
+                        QandAGenerate();
+                    }
                 }
+            } else {
+                getCurrentCoins++;
+                getEarnedCoins++;
+                coins.setText(String.valueOf(getCurrentCoins));
+                MainActivity.editor.putInt("earnedCoins", getEarnedCoins);
+                MainActivity.editor.putInt("Coins", getCurrentCoins);
+                MainActivity.editor.apply();
+                s.startAnimation(animSpinOut);
+                r.startAnimation(animSpinOut);
+                s.setVisibility(View.GONE);
+                r.setVisibility(View.GONE);
+                ResetRadioButton();
             }
-            if (MainActivity.prefs.getString("selectlevel",null).equals("level31")){
-                if (getCurrentLevel == 61){
-                    CongratsDiag();
-                }else{
-                    CheckAndNextLVL(getCurrentLevel);
-                    QandAGenerate();
-                }
-            }
-            if (MainActivity.prefs.getString("selectlevel",null).equals("level61")){
-                if (getCurrentLevel == 91){
-                    CongratsDiag();
-                }else{
-                    CheckAndNextLVL(getCurrentLevel);
-                    QandAGenerate();
-                }
-            }
-        }else {
-            getCurrentCoins++;
-            getEarnedCoins++;
-            coins.setText(String.valueOf(getCurrentCoins));
-            MainActivity.editor.putInt("earnedCoins", getEarnedCoins);
-            MainActivity.editor.putInt("Coins", getCurrentCoins);
-            MainActivity.editor.apply();
-            s.startAnimation(animSpinOut);
-            r.startAnimation(animSpinOut);
-            s.setVisibility(View.GONE);
-            r.setVisibility(View.GONE);
-            ResetRadioButton();
-        }
     }
 
     //Function->NextLVL
